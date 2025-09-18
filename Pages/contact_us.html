@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact – EcoFresh Bottles</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <header>
-        <a href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" width="120"></a>
+        <a href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" width="100"></a>
         <nav>
             <a href="../index.html">Home</a>
             <a href="./about_us.html">About</a>
@@ -20,11 +20,12 @@
             <a href="./Gallery.html">Gallery</a>
             <a href="./contact_us.html" class="active">Contact</a>
             <a href="./References.html">References</a>
+            <li><a href="./sitemap.html"><i class="fas fa-sitemap"></i> Sitemap</a></li>
         </nav>
     </header>
 
     <main class="contact-main">
-        <section class="contact-card">
+        <div class="contact-card">
             <h1>Contact Us</h1>
             <p>We’d love to hear from you! Reach out using the form below or our contact details.</p>
 
@@ -34,7 +35,7 @@
                 <p><i class="fas fa-map-marker-alt"></i> 21 Aqua Way, Johannesburg, South Africa</p>
             </div>
 
-            <form action="#" method="post">
+            <form id="contactForm" action="#" method="post">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
                     <input type="text" name="name" placeholder="Your Name" required>
@@ -57,23 +58,23 @@
                 </div>
                 <button type="submit">Send Message</button>
             </form>
-        </section>
+        </div>
 
         <section class="map-section">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.7133788111614!2d30.40260607509098!3d-22.997564979191253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ec5c5324f2ce77f%3A0xba23011c467f0fb0!2sTshisahulu%20Anglican%20Church%2C%20St%20Mary&#39;s!5e0!3m2!1sen!2sza!4v1755601032845!5m2!1sen!2sza"
-                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.265102030908!2d28.047305215029784!3d-26.204102983455507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9509a5d1f01b7d%3A0xdea93a75e47a63b0!2sJohannesburg!5e0!3m2!1sen!2sza!4v1737149234567"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </section>
     </main>
 
+    <div class="social-footer">
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/27663792391" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+
     <footer>
-        <div class="footer-socials">
-            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/27663792391" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-        </div>
         <p>&copy; 2025 EcoFresh Bottles</p>
     </footer>
 

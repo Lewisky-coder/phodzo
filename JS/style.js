@@ -2,27 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==============================================
        Homepage Cards Tilt & Floating
     =============================================== */
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        // Apply Vanilla Tilt
-        VanillaTilt.init(card, {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.3
-        });
 
-        // Floating effect
-        const img = card.querySelector('img');
-        if (img) {
-            let pos = 0, direction = 1;
-            setInterval(() => {
-                if (pos > 10 || pos < -10) direction *= -1;
-                pos += direction;
-                img.style.transform = `translateY(${pos}px)`;
-            }, 60);
-        }
-    });
 
     /* ==============================================
        Button Click Animation
@@ -91,4 +71,77 @@ document.addEventListener("DOMContentLoaded", () => {
             el.style.transform = "translateY(0)";
         }, 100 * index);
     });
+});
+/* ==============================
+   CONTACT FORM HANDLING
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); // prevent page reload
+
+            // Create thank you overlay
+            const thankYou = document.createElement("div");
+            thankYou.className = "thank-you-overlay";
+            thankYou.innerHTML = `
+        <div class="thank-you-box">
+          <h2>✅ Thank You!</h2>
+          <p>Your support means a lot to us at EcoFresh Bottles.</p>
+          <button id="closeThankYou">Close</button>
+        </div>
+      `;
+            document.body.appendChild(thankYou);
+
+            // Close button
+            document.getElementById("closeThankYou").addEventListener("click", () => {
+                thankYou.remove();
+                form.reset(); // clear form fields
+            });
+        });
+    }
+});
+
+/* ==============================
+   SCROLL ANIMATIONS
+================================ */
+const revealElements = document.querySelectorAll(
+    "h1, h2, h3, p, li, img, .contact-card, .sitemap-list li"
+);
+
+const revealOnScroll = () => {
+    const windowHeight = window.innerHeight;
+    const revealPoint = 100;
+
+    revealElements.forEach((el) => {
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - revealPoint) {
+            el.classList.add("reveal");
+        }
+    });
+};
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("✅ Thank you for your support! We will get back to you soon.");
+        form.reset();
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Handle contact form thank you
+    const form = document.getElementById("contactForm");
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("✅ Thank you for your support! We will get back to you soon.");
+            form.reset();
+        });
+    }
 });
