@@ -1,70 +1,81 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products – EcoFresh Bottles</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Products — EcoFresh Bottles</title>
+  <meta name="description" content="EcoFresh product range and details." />
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
 <body>
-  <header>
-    <a href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" width="100"></a>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="./about_us.html">About</a>
-      <a href="./product.html" class="active">Products</a>
-      <a href="./Gallery.html">Gallery</a>
-      <a href="./contact_us.html">Contact</a>
-      <a href="./References.html">References</a>
-      <li><a href="./sitemap.html"><i class="fas fa-sitemap"></i> Sitemap</a></li>
-    </nav>
+  <header class="site-header">
+    <div class="container header-grid">
+      <a class="logo" href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh logo"></a>
+      <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="../index.html">Home</a>
+        <a href="./about_us.html">About</a>
+        <a href="./product.html" class="active">Products</a>
+        <a href="./Gallery.html">Gallery</a>
+        <a href="./contact_us.html">Contact</a>
+
+      </nav>
+    </div>
   </header>
 
-  <main class="products-main">
-    <h1>Our Bottles</h1>
-    <p>Choose a bottle that fits your day. All models are BPA-free and leak-proof.</p>
+  <main>
+    <section class="section container">
+      <h1>Our Bottles</h1>
+      <p>Find bottles for every lifestyle — from insulated stainless steel to light-weight Tritan bottles for kids and
+        sports.</p>
 
-    <div class="product-grid">
-      <article>
-        <img src="../Assets/Kids.jpeg" alt="Kids 350ml bottle">
-        <h3>Kids 350 ml</h3>
-        <p>Light, bite-safe spout.</p>
-        <p><strong>R149</strong></p>
-        <a href="./contact_us.html">More info</a>
-      </article>
+      <div class="product-grid grid-3">
+        <article class="card product-item">
+          <img src="../Assets/sport.jpeg" alt="Sport 750ml bottle">
+          <h3>Sport 750 ml</h3>
+          <p>Double-wall insulated stainless steel. Keeps beverages cold for up to 18 hours.</p>
+          <p class="muted">R299</p>
+          <a class="btn btn-secondary" href="./contact_us.html">Enquire / Buy</a>
+        </article>
 
-      <article>
-        <img src="../Assets/sport.jpeg" alt="Sport 750ml bottle">
-        <h3>Sport 750 ml</h3>
-        <p>Double-wall insulated. Cold 18h / Hot 8h.</p>
-        <p><strong>R299</strong></p>
-        <a href="./contact_us.html">More info</a>
-      </article>
+        <article class="card product-item">
+          <img src="../Assets/300ml.jpeg" alt="Kids 350ml bottle">
+          <h3>Kids 350 ml</h3>
+          <p>Lightweight, secure spout, and colourful finishes for kids.</p>
+          <p class="muted">R149</p>
+          <a class="btn btn-secondary" href="./contact_us.html">Enquire / Buy</a>
+        </article>
 
-      <article>
-        <img src="../Assets/travel1.jpeg" alt="Travel 1L bottle">
-        <h3>Travel 1 L</h3>
-        <p>Wide mouth, carry loop, car-cup friendly.</p>
-        <p><strong>R349</strong></p>
-        <a href="./contact_us.html">More info</a>
-      </article>
+        <article class="card product-item">
+          <img src="../Assets/travel1.jpeg" alt="Travel 1L bottle">
+          <h3>Travel 1 L</h3>
+          <p>Wide mouth for easy filling and cleaning; robust for travel.</p>
+          <p class="muted">R349</p>
+          <a class="btn btn-secondary" href="./contact_us.html">Enquire / Buy</a>
+        </article>
 
-      <article>
-        <img src="../Assets/brush.jpeg" alt="Cleaning brush">
-        <h3>Cleaning Brush</h3>
-        <p>Deep cleaning made simple.</p>
-        <p><strong>R59</strong></p>
-        <a href="./contact_us.html">More info</a>
-      </article>
-    </div>
+        <!-- Add more products the same way -->
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 EcoFresh Bottles</p>
+    <div class="container footer-inner">
+      <p>© 2025 EcoFresh Bottles</p>
+    </div>
+    <div class="container footer-inner">
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
   </footer>
+
+  <script src="../js/script.js" defer></script>
 </body>
 
 </html>

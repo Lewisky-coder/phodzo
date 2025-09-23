@@ -2,83 +2,96 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact – EcoFresh Bottles</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — EcoFresh Bottles</title>
+    <meta name="description" content="Contact EcoFresh Bottles for orders, enquiries and wholesale quotes." />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
 <body>
-    <header>
-        <a href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" width="100"></a>
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="./about_us.html">About</a>
-            <a href="./product.html">Products</a>
-            <a href="./Gallery.html">Gallery</a>
-            <a href="./contact_us.html" class="active">Contact</a>
-            <a href="./References.html">References</a>
-            <li><a href="./sitemap.html"><i class="fas fa-sitemap"></i> Sitemap</a></li>
-        </nav>
+    <header class="site-header">
+        <div class="container header-grid">
+            <a class="logo" href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh logo"></a>
+            <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+            <nav class="site-nav">
+                <a href="../index.html">Home</a>
+                <a href="./about_us.html">About</a>
+                <a href="./product.html">Products</a>
+                <a href="./Gallery.html">Gallery</a>
+                <a href="./contact_us.html" class="active">Contact</a>
+
+            </nav>
+        </div>
     </header>
 
-    <main class="contact-main">
-        <div class="contact-card">
+    <main>
+        <section class="section container">
             <h1>Contact Us</h1>
-            <p>We’d love to hear from you! Reach out using the form below or our contact details.</p>
+            <div class="grid-2">
+                <div>
+                    <p><strong>Email:</strong> <a href="mailto:info@ecofresh.co.za">info@ecofresh.co.za</a></p>
+                    <p><strong>Phone:</strong> +27 66 379 2391</p>
+                    <p><strong>Address:</strong> 21 Aqua Way, Johannesburg, South Africa</p>
 
-            <div class="contact-details">
-                <p><i class="fas fa-envelope"></i> <a href="mailto:phodzo@ecofresh.co.za">phodzo@ecofresh.co.za</a></p>
-                <p><i class="fas fa-phone"></i> +27 66 379 2391</p>
-                <p><i class="fas fa-map-marker-alt"></i> 21 Aqua Way, Johannesburg, South Africa</p>
+                    <form id="contact-form" class="contact-form" action="#" method="post" aria-label="Contact form">
+                        <div class="input-row">
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text" required />
+                        </div>
+
+                        <div class="input-row">
+                            <label for="surname">Surname</label>
+                            <input id="surname" name="surname" type="text" required />
+                        </div>
+
+                        <div class="input-row">
+                            <label for="idnum">ID / Passport</label>
+                            <input id="idnum" name="idnum" type="text" required />
+                        </div>
+
+                        <div class="input-row">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" required />
+                        </div>
+
+                        <div class="input-row">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <div class="map-wrap" aria-hidden="false">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.265102030908!2d28.047305215029784!3d-26.204102983455507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9509a5d1f01b7d%3A0xdea93a75e47a63b0!2sJohannesburg!5e0!3m2!1sen!2sza!4v1737149234567"
+                            style="border:0; width:100%; height:360px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
             </div>
-
-            <form id="contactForm" action="#" method="post">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" name="surname" placeholder="Your Surname" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-id-card"></i>
-                    <input type="text" name="Id" placeholder="ID Number" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-comment"></i>
-                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-
-        <section class="map-section">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.265102030908!2d28.047305215029784!3d-26.204102983455507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9509a5d1f01b7d%3A0xdea93a75e47a63b0!2sJohannesburg!5e0!3m2!1sen!2sza!4v1737149234567"
-                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </section>
     </main>
 
-    <div class="social-footer">
-        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://wa.me/27663792391" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
-
     <footer>
-        <p>&copy; 2025 EcoFresh Bottles</p>
+        <div class="container footer-inner">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>© 2025 EcoFresh Bottles</p>
+        </div>
     </footer>
 
-    <script src="../JS/style.js"></script>
+    <script src="../js/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/a2d9d6a66f.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

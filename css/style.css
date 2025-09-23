@@ -1,409 +1,354 @@
-/* ==============================
-   GLOBAL STYLES
-================================ */
+/* ===============================
+   CSS Reset (light)
+   =============================== */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 1.125rem;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fb;
+    background: #f7faf9;
+    color: #0b1220;
 }
 
-/* ==============================
-   HEADER + NAV
-================================ */
-header {
-    background: #0a2e5c;
-    /* Dark blue */
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ===== Variables ===== */
+:root {
+    --primary: #0d5b3f;
+    /* deep green */
+    --accent: #f2b705;
+    /* warm accent */
+    --muted: #6b7280;
+    --card: #ffffff;
+    --container-max: 1100px;
+    --radius: .6rem;
+}
+
+/* ===== Utilities ===== */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.center {
+    text-align: center;
+}
+
+/* ===== Header & Nav ===== */
+.site-header {
+    background: var(--primary);
+    color: #fff;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-header img {
-    border-radius: 10px;
-}
-
-nav {
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-nav a:hover,
-nav a.active {
-    color: #ffcc00;
-    /* Yellow hover/active */
-}
-
-/* ==============================
-   MAIN CONTENT
-================================ */
-main {
-    padding: 40px 8%;
-}
-
-h1,
-h2,
-h3 {
-    color: #0a2e5c;
-    margin-bottom: 15px;
-}
-
-p,
-li {
-    margin-bottom: 12px;
-}
-
-
-/* ==============================
-   CONTACT PAGE
-================================ */
-.contact-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: start;
-}
-
-.contact-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.contact-details p {
-    margin-bottom: 8px;
-}
-
-.social-footer {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.social-footer a {
-    font-size: 2rem;
-    color: #fff;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.social-footer a:hover {
-    transform: scale(1.2);
-    color: #ffcc00;
-}
-
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-form input,
-form textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    width: 100%;
-}
-
-form input:focus,
-form textarea:focus {
-    outline: none;
-    border: 1px solid #0a2e5c;
-    box-shadow: 0 0 5px #0a2e5c;
-}
-
-form button {
-    background: #0a2e5c;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-form button:hover {
-    background: #ffcc00;
-    color: #0a2e5c;
-}
-
-/* ==============================
-   SITEMAP PAGE
-================================ */
-.sitemap-list {
-    list-style: none;
-    margin-top: 20px;
-}
-
-.sitemap-list li {
-    margin-bottom: 12px;
-}
-
-.sitemap-list a {
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: #0a2e5c;
+.header-grid {
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: color 0.3s ease;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
 }
 
-.sitemap-list a:hover {
-    color: #ffcc00;
+.logo img {
+    height: 3.5rem;
+    display: block;
+    margin-left: .5rem;
 }
 
-/* ==============================
-   FOOTER
-================================ */
-footer {
-    background: #0a2e5c;
-    color: #fff;
-    text-align: center;
-    padding: 25px 10px;
-    margin-top: 40px;
-}
-
-.social-footer {
-    margin-top: 15px;
+/* Nav */
+.site-nav {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
+    align-items: center;
+    margin-right: 1rem;
 }
 
-.social-footer a {
-    font-size: 2rem;
+.site-nav a {
     color: #fff;
-    transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    font-weight: 600;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
 }
 
-.social-footer a:hover {
-    transform: scale(1.2);
-    color: #ffcc00;
+.site-nav a:hover,
+.site-nav a.active {
+    color: var(--accent);
 }
 
-/* ==============================
-   RESPONSIVE DESIGN
-================================ */
-@media (max-width: 992px) {
-    .contact-main {
+/* Hamburger */
+.hamburger {
+    display: none;
+    background: none;
+    border: 0;
+    padding: .25rem;
+    margin-right: .5rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 2rem;
+    height: .22rem;
+    background: #fff;
+    margin: .26rem 0;
+    border-radius: .2rem;
+}
+
+/* ===== Hero ===== */
+.hero {
+    background: linear-gradient(rgba(13, 91, 63, 0.82), rgba(13, 91, 63, 0.82)), url('../Assets/Hero.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.25rem;
+    margin-bottom: .5rem;
+}
+
+.lead {
+    font-size: 1.0625rem;
+    opacity: .97;
+    margin-bottom: 1rem;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: .6rem 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #111;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Sections & Grid ===== */
+.section {
+    padding: 2rem 0;
+}
+
+h2 {
+    color: var(--primary);
+    margin-bottom: .5rem;
+}
+
+.muted,
+p.muted {
+    color: var(--muted);
+}
+
+/* Grid helpers */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+@media (max-width:980px) {
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width:640px) {
+
+    .grid-3,
+    .grid-2 {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 768px) {
-    nav {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    body {
-        font-size: 16px;
-    }
+/* Cards */
+.card {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    transition: transform .28s ease;
 }
 
-/* Contact Page */
-.contact-main {
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: .5rem;
+    display: block;
+    margin-bottom: .6rem;
+}
+
+/* Product grid */
+.product-grid .card {
+    text-align: center;
+}
+
+/* FAQ */
+.faq {
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e6e8eb;
+    padding: .9rem 0;
+    cursor: pointer;
+}
+
+.faq-item h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.faq-item h3::after {
+    content: '+';
+    font-size: 1.2rem;
+}
+
+.faq-item.active h3::after {
+    content: '-';
+    transform: rotate(180deg);
+}
+
+.faq-item p {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease;
+    margin: 0;
+}
+
+.faq-item.active p {
+    max-height: 240px;
+    margin-top: .5rem;
+}
+
+/* Contact form */
+.contact-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    font-size: 18px;
+    gap: .9rem;
 }
 
-.contact-card {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
+.input-row label {
+    font-weight: 600;
+    font-size: .95rem;
+    margin-bottom: .25rem;
+    display: block;
+}
+
+.input-row input,
+.input-row textarea {
+    padding: .7rem;
+    border: 1px solid #d1d5db;
+    border-radius: .6rem;
+    font-size: 1rem;
     width: 100%;
-    margin-bottom: 2rem;
 }
 
-.contact-details p {
-    margin: 8px 0;
-    font-size: 18px;
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-    border-radius: 8px;
-}
-
-.input-group i {
-    margin-right: 10px;
-    color: #0056b3;
-}
-
-.input-group input,
-.input-group textarea {
-    border: none;
-    outline: none;
-    flex: 1;
-    font-size: 18px;
-}
-
-button {
-    background: #0056b3;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background: #003d80;
-}
-
-.map-section {
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 2rem;
-    border-radius: 12px;
+/* Map wrap */
+.map-wrap {
+    border-radius: .6rem;
     overflow: hidden;
-}
-
-.social-footer {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.social-footer a {
-    font-size: 40px;
-    margin: 0 15px;
-    color: #0056b3;
-    transition: color 0.3s;
-}
-
-.social-footer a:hover {
-    color: #003d80;
-}
-
-/* Hero Section */
-.hero {
-    background: linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 50, 0.6)),
-        url('../Assets/hero-bg.jpg') no-repeat center center/cover;
-    color: white;
-    text-align: center;
-    padding: 5rem 2rem;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero-content p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-}
-
-.btn-primary {
-    background: #0056b3;
-    color: #fff;
-    padding: 0.8rem 1.6rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: background 0.3s;
-}
-
-.btn-primary:hover {
-    background: #003d80;
-}
-
-/* Mission */
-.mission {
-    padding: 3rem 2rem;
-    text-align: center;
-    background: #f5f5f5;
-}
-
-/* Features */
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    padding: 3rem 2rem;
-}
-
-.feature-card {
-    text-align: center;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.feature-card i {
-    font-size: 40px;
-    margin-bottom: 1rem;
-    color: #0056b3;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-}
-
-/* Impact */
-.impact {
-    text-align: center;
-    padding: 3rem 2rem;
-    background: #eef6ff;
-    font-size: 18px;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
 }
 
 /* Footer */
 footer {
-    background: #002147;
-    color: white;
-    text-align: center;
-    padding: 2rem;
-}
-
-.footer-links {
-    margin-bottom: 1rem;
-}
-
-.footer-links a {
+    background: var(--primary);
     color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
-    font-size: 16px;
+    padding: 1.25rem 0;
+    margin-top: 2rem;
 }
 
-.footer-links a:hover {
-    text-decoration: underline;
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+/* Social icons */
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: .25rem;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+/* Small screens */
+@media (max-width:768px) {
+    .site-nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        padding: 1rem 0;
+    }
+
+    .site-nav.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero {
+        padding: 3rem 0;
+    }
+
+    .faq {
+        max-width: 95%;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
 }

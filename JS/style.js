@@ -1,147 +1,79 @@
 document.addEventListener("DOMContentLoaded", () => {
-    /* ==============================================
-       Homepage Cards Tilt & Floating
-    =============================================== */
+    // Hamburger toggle
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".site-nav");
+    if (hamburger && nav) {
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("show");
+            const expanded = hamburger.getAttribute("aria-expanded") === "true";
+            hamburger.setAttribute("aria-expanded", String(!expanded));
+        });
+    }
 
-
-    /* ==============================================
-       Button Click Animation
-    =============================================== */
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            btn.classList.add('clicked');
-            setTimeout(() => btn.classList.remove('clicked'), 300);
-
-            // If "Shop Now" button, redirect to products
-            if (btn.textContent.toLowerCase().includes("shop")) {
-                window.location.href = './Pages/product.html';
-            }
+    // FAQ accordion (single open)
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach(item => {
+        item.addEventListener("click", () => {
+            faqItems.forEach(i => { if (i !== item) i.classList.remove("active"); });
+            item.classList.toggle("active");
         });
     });
 
-    /* ==============================================
-       Contact Form Submit & Thank You Overlay
-    =============================================== */
-    const contactForm = document.querySelector('form');
+    // Contact form submit -> overlay thank you
+    const contactForm = document.querySelector("#contact-form");
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // prevent real submit
+        contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-            // Create overlay
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.background = 'rgba(0,0,0,0.9)';
-            overlay.style.display = 'flex';
-            overlay.style.justifyContent = 'center';
-            overlay.style.alignItems = 'center';
-            overlay.style.zIndex = '2000';
-            overlay.style.flexDirection = 'column';
-            overlay.style.color = '#00ffe7';
+            const overlay = document.createElement("div");
+            overlay.style.position = "fixed";
+            overlay.style.left = 0;
+            overlay.style.top = 0;
+            overlay.style.width = "100%";
+            overlay.style.height = "100%";
+            overlay.style.background = "rgba(13,91,63,0.92)";
+            overlay.style.display = "flex";
+            overlay.style.alignItems = "center";
+            overlay.style.justifyContent = "center";
+            overlay.style.zIndex = 9999;
+
             overlay.innerHTML = `
-                <h1>Thank You for Your Support!</h1>
-                <p>We received your message and will get back to you shortly.</p>
-                <button id="closeOverlay">Close</button>
-            `;
-            document.body.appendChild(overlay);
+        <div style="background:#fff;padding:1.8rem;max-width:28rem;border-radius:.6rem;text-align:center">
+          <h2 style="color:${getComputedStyle(document.documentElement).getPropertyValue('--primary') || '#0d5b3f'}">Thank you!</h2>
+          <p style="margin:.6rem 0 1rem;color:#333;font-size:1rem">We received your message and will be in touch shortly.</p>
+          <button id="closeOverlay" style="background:${getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#f2b705'}; color:#111; padding:.6rem 1rem; border:0; border-radius:.4rem; cursor:pointer">Close</button>
+        </div>
+      `;
 
-            // Close overlay
-            const closeBtn = document.getElementById('closeOverlay');
-            closeBtn.addEventListener('click', () => {
+            document.body.appendChild(overlay);
+            document.getElementById("closeOverlay").addEventListener("click", () => {
                 overlay.remove();
                 contactForm.reset();
             });
         });
     }
 
-    /* ==============================================
-       Smooth Elements Animation on Page Load
-    =============================================== */
-    const fadeElements = document.querySelectorAll('main, .hero, footer, header');
-    fadeElements.forEach((el, index) => {
+    // Simple reveal animation
+    const els = document.querySelectorAll("main section, .card");
+    els.forEach((el, i) => {
         el.style.opacity = 0;
-        el.style.transform = "translateY(30px)";
+        el.style.transform = "translateY(12px)";
         setTimeout(() => {
-            el.style.transition = "all 0.8s ease";
+            el.style.transition = "all .6s ease";
             el.style.opacity = 1;
             el.style.transform = "translateY(0)";
-        }, 100 * index);
+        }, 120 + i * 60);
     });
 });
-/* ==============================
-   CONTACT FORM HANDLING
-================================ */
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
 
-    if (form) {
-        form.addEventListener("submit", (e) => {
-            e.preventDefault(); // prevent page reload
-
-            // Create thank you overlay
-            const thankYou = document.createElement("div");
-            thankYou.className = "thank-you-overlay";
-            thankYou.innerHTML = `
-        <div class="thank-you-box">
-          <h2>✅ Thank You!</h2>
-          <p>Your support means a lot to us at EcoFresh Bottles.</p>
-          <button id="closeThankYou">Close</button>
-        </div>
-      `;
-            document.body.appendChild(thankYou);
-
-            // Close button
-            document.getElementById("closeThankYou").addEventListener("click", () => {
-                thankYou.remove();
-                form.reset(); // clear form fields
-            });
+    if (hamburger && navLinks) {
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            hamburger.classList.toggle("open");
         });
     }
 });
 
-/* ==============================
-   SCROLL ANIMATIONS
-================================ */
-const revealElements = document.querySelectorAll(
-    "h1, h2, h3, p, li, img, .contact-card, .sitemap-list li"
-);
-
-const revealOnScroll = () => {
-    const windowHeight = window.innerHeight;
-    const revealPoint = 100;
-
-    revealElements.forEach((el) => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - revealPoint) {
-            el.classList.add("reveal");
-        }
-    });
-};
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contactForm");
-
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        alert("✅ Thank you for your support! We will get back to you soon.");
-        form.reset();
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Handle contact form thank you
-    const form = document.getElementById("contactForm");
-    if (form) {
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("✅ Thank you for your support! We will get back to you soon.");
-            form.reset();
-        });
-    }
-});

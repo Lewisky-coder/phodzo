@@ -2,53 +2,70 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gallery – EcoFresh Bottles</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery — EcoFresh Bottles</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
 <body>
-  <header>
-    <a href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" width="100"></a>
-    <nav>
+  <header class="site-header">
+    <a class="logo" href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh logo"></a>
+    <button class="hamburger" aria-label="Open menu"
+      aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav">
       <a href="../index.html">Home</a>
       <a href="./about_us.html">About</a>
       <a href="./product.html">Products</a>
       <a href="./Gallery.html" class="active">Gallery</a>
       <a href="./contact_us.html">Contact</a>
       <a href="./References.html">References</a>
-      <li><a href="./sitemap.html"><i class="fas fa-sitemap"></i> Sitemap</a></li>
+
     </nav>
   </header>
 
-  <main class="gallery-main">
-    <h1>Everyday EcoFresh</h1>
-    <p>See how people use EcoFresh at school, work, gym, and outdoors.</p>
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Gallery</h1>
 
-    <section class="grid">
-      <figure>
-        <img src="../Assets/office.jpeg" alt="Bottle on office desk">
-        <figcaption>Office</figcaption>
-      </figure>
-      <figure>
-        <img src="../Assets/gym.jpeg" alt="Bottle next to gym equipment">
-        <figcaption>Gym</figcaption>
-      </figure>
-      <figure>
-        <img src="../Assets/school.jpeg" alt="Bottle in classroom backpack">
-        <figcaption>School</figcaption>
-      </figure>
-      <figure>
-        <img src="../Assets/300ml.jpeg" alt="Bottle clipped to hiking backpack">
-        <figcaption>Outdoors</figcaption>
-      </figure>
+        <div class="grid-3">
+          <figure class="card"><img src="../Assets/office.jpeg" alt="Office image">
+            <figcaption>Office</figcaption>
+          </figure>
+          <figure class="card"><img src="../Assets/gym.jpeg" alt="Gym image">
+            <figcaption>Gym</figcaption>
+          </figure>
+          <figure class="card"><img src="../Assets/school.jpeg" alt="School image">
+            <figcaption>School</figcaption>
+          </figure>
+          <figure class="card"><img src="../Assets/sport.jpeg" alt="Outdoors image">
+            <figcaption>Outdoors</figcaption>
+          </figure>
+          <figure class="card"><img src="../Assets/600ml.jpeg" alt="Bigbottle image">
+            <figcaption>600</figcaption>
+          </figure>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 EcoFresh Bottles</p>
+    <div class="container footer-inner">
+      <div class="footer-links"><a href="../index.html">Home</a> · <a href="./contact_us.html">Contact</a></div>
+      <p>© 2025 EcoFresh Bottles</p>
+    </div>
+    <div class="container footer-inner">
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
   </footer>
+
+  <script src="../js/script.js" defer></script>
 </body>
 
 </html>
