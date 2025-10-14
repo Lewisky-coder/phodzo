@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Enquiry — EcoFresh Bottles</title>
+    <meta name="description"
+        content="Enquire about bulk orders, custom branding or sponsorships with EcoFresh Bottles." />
+    <meta name="keywords" content="EcoFresh enquiry, bulk order, custom bottles, sponsorship" />
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-grid">
+            <a class="logo" href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo"></a>
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="about_us.html">About</a>
+                <a href="product.html">Products</a>
+                <a href="Gallery.html">Gallery</a>
+                <a href="enquery.html" class="active">Enquire</a>
+                <a href="contact_us.html">Contact</a>
+            </nav>
+
+            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section container">
+            <h1>Enquiry — Bulk, Branding & Partnerships</h1>
+            <p>Fill the form to request a quote for bulk orders, custom branding, sponsorships or volunteer
+                partnerships.</p>
+
+            <form id="enquiry-form" class="contact-form" action="#" method="post">
+                <div class="input-row">
+                    <label for="e-name">Full Name</label>
+                    <input id="e-name" name="name" type="text" required>
+                </div>
+
+                <div class="input-row">
+                    <label for="e-email">Email</label>
+                    <input id="e-email" name="email" type="email" required>
+                </div>
+
+                <div class="input-row">
+                    <label for="e-company">Company / Organisation (optional)</label>
+                    <input id="e-company" name="company" type="text">
+                </div>
+
+                <div class="input-row">
+                    <label for="e-product">Product</label>
+                    <select id="e-product" name="product" required>
+                        <option value="sport" data-label="Sport 750 ml">Sport 750 ml</option>
+                        <option value="kids" data-label="Kids 350 ml">Kids 350 ml</option>
+                        <option value="travel" data-label="Travel 1L">Travel 1 L</option>
+                        <option value="office" data-label="Office">office</option>
+                        <option value="All pair" data-label="Pairs">Pairs</option>
+                        <option value="Gym" data-label="Gym">Gym</option>
+                        <option value="custom" data-label="Custom / Branded">Custom / Branded</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <label for="e-qty">Quantity</label>
+                    <input id="e-qty" name="quantity" type="number" min="1" value="1" required>
+                </div>
+
+                <div class="input-row">
+                    <label for="e-message">Details (branding requirements / deadlines)</label>
+                    <textarea id="e-message" name="message" rows="4"></textarea>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit">Get Estimate</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="X" title="X"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <p>© 2025 EcoFresh Bottles</p>
+        </div>
+    </footer>
+
+    <script src="../JS/style.js" defer></script>
+</body>
+
+</html>

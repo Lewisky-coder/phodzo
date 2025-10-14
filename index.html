@@ -6,31 +6,35 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EcoFresh Bottles — Home</title>
   <meta name="description"
-    content="EcoFresh Bottles — sustainable, durable reusable bottles. Made for daily life; BPA-free, stylish, and eco-friendly." />
+    content="EcoFresh Bottles — durable, BPA-free reusable bottles designed for everyday life. Reduce single-use plastic with style." />
+  <meta name="keywords"
+    content="EcoFresh, reusable bottles, BPA-free bottles, stainless steel, travel bottle, kids bottle" />
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-  <link rel="icon" href="Assets/favicon.png" type="image/png">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container header-grid">
-      <a class="logo" href="index.html" aria-label="EcoFresh home">
-        <img src="Assets/Logo.jpeg" alt="EcoFresh logo" />
+      <a class="logo" href="./index.html" aria-label="EcoFresh Home">
+        <img src="./Assets/download.jfif" alt="EcoFresh Bottles logo" />
       </a>
 
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="./index.html" class="active">Home</a>
+        <a href="./pages/about_us.html">About us</a>
+        <a href="./pages/product.html">Products</a>
+        <a href="./pages/Gallery.html">Gallery</a>
+        <a href="./pages/enquery.html">Enquire</a>
+        <a href="./pages/contact_us.html">Contact us</a>
+      </nav>
+
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-
-      <nav class="site-nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="active">Home</a>
-        <a href="Pages/about_us.html">About</a>
-        <a href="Pages/product.html">Products</a>
-        <a href="Pages/Gallery.html">Gallery</a>
-        <a href="Pages/contact_us.html">Contact</a>
-        <a href="Pages/references.html">References</a>
-      </nav>
     </div>
   </header>
 
@@ -38,11 +42,17 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container hero-inner">
-        <h1>EcoFresh Bottles</h1>
-        <p class="lead">Eco-friendly, durable, and stylish bottles — designed for your daily life and our planet.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="Pages/product.html">Shop Now</a>
-          <a class="btn btn-outline" href="Pages/about_us.html">Learn More</a>
+        <div class="hero-left">
+          <h1>EcoFresh Bottles</h1>
+          <p class="lead">Eco-friendly, durable bottles — designed to reduce single-use plastics while keeping style and
+            performance.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="./pages/product.html">Shop Now</a>
+            <a class="btn btn-outline" href="./pages/about_us.html">Learn More</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <img src="./Assets/OIP.jpeg" alt="EcoFresh bottle hero image" loading="lazy">
         </div>
       </div>
     </section>
@@ -50,8 +60,8 @@
     <!-- MISSION -->
     <section class="section mission container">
       <h2>Our Mission</h2>
-      <p>To reduce single-use plastics by delivering long-lasting, safe, and beautiful bottle solutions. We use
-        food-grade materials, careful design, and community-driven programs to make reuse easy and joyful.</p>
+      <p>We design and supply high-quality reusable bottles — stainless steel, Tritan™ and glass options — to make
+        everyday hydration sustainable and beautiful.</p>
     </section>
 
     <!-- FEATURES -->
@@ -60,19 +70,19 @@
         <article class="feature card">
           <div class="feature-icon">🌱</div>
           <h3>Sustainability</h3>
-          <p>Reusable materials, recyclable packaging, and local cleanup partnerships.</p>
+          <p>Durable materials and recyclable packaging to reduce waste.</p>
         </article>
 
         <article class="feature card">
           <div class="feature-icon">🔬</div>
-          <h3>Quality</h3>
-          <p>BPA-free plastics, stainless steel, and tested, safe components for everyday use.</p>
+          <h3>Safe Materials</h3>
+          <p>BPA-free components and food-grade finishes for safety.</p>
         </article>
 
         <article class="feature card">
-          <div class="feature-icon">🎨</div>
-          <h3>Design</h3>
-          <p>Ergonomic shapes, powder-coat finishes, and colours that last.</p>
+          <div class="feature-icon">⚙️</div>
+          <h3>Designed To Last</h3>
+          <p>Ergonomic shapes, leak-tested lids and long-lasting coatings.</p>
         </article>
       </div>
     </section>
@@ -80,86 +90,89 @@
     <!-- PRODUCTS PREVIEW -->
     <section class="section products-preview container">
       <h2>Featured Bottles</h2>
-      <div class="product-grid grid-3">
+      <div class="product-grid grid-3" id="featured-grid">
+        <!-- JS will populate featured cards if images exist, static fallback provided -->
         <article class="product card">
-          <img src="../Assets/office.jpeg" alt="Stainless Pro — placeholder" />
+          <img src="./Assets/100ml.jpeg" alt="Stainless Pro 750ml double-wall insulated bottle" loading="lazy">
           <h3>Stainless Pro</h3>
-          <p class="muted">Double-wall insulated. Keeps drinks cold for 18h. R299</p>
+          <p class="muted">Double-wall insulated. Keeps drinks cold for 18h. <strong>R299</strong></p>
         </article>
 
         <article class="product card">
-          <img src="./Assets/Kids.jpeg" alt="Kids 350ml — placeholder" />
+          <img src="./Assets/Kids.jpeg" alt="Kids 350ml bottle pastel" loading="lazy">
           <h3>Kids 350 ml</h3>
-          <p class="muted">Lightweight, leak-proof spout. R149</p>
+          <p class="muted">Lightweight and leak-proof spout. <strong>R149</strong></p>
         </article>
 
         <article class="product card">
-          <img src="./Assets/travel1.jpeg" alt="Travel 1L — placeholder" />
+          <img src="./Assets/travel1.jpeg" alt="Travel 1L wide mouth bottle" loading="lazy">
           <h3>Travel 1 L</h3>
-          <p class="muted">Wide mouth and carry loop — R349</p>
+          <p class="muted">Wide mouth and carry loop. <strong>R349</strong></p>
         </article>
       </div>
-      <p class="center"><a class="btn btn-secondary" href="./Pages/product.html">View All Products</a></p>
+      <p class="center"><a class="btn btn-secondary" href="./pages/product.html">View All Products</a></p>
     </section>
 
-    <!-- FAQ preview -->
-    <section class="section faq-preview container">
-      <h2>Quick Questions</h2>
-      <div class="faq">
-        <div class="faq-item">
-          <h3>How long do bottles last?</h3>
-          <p>With basic care and avoiding harsh abrasives, EcoFresh bottles last for years. Painted finishes are durable
-            but treat them kindly.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Are EcoFresh bottles BPA-free?</h3>
-          <p>Yes — all of our plastic components are BPA-free and food-safe.</p>
-        </div>
+    <!-- FAQ (Accordion) -->
+    <section class="section faq container" id="home-faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>Are EcoFresh bottles BPA-free?</h3>
+        <p>Yes — all plastic parts are BPA-free and food-safe. Stainless steel models are food-grade 18/8.</p>
       </div>
-      <p class="center"><a class="btn btn-outline" href="Pages/faq.html">See the full FAQ</a></p>
+
+      <div class="faq-item">
+        <h3>How long do the bottles last?</h3>
+        <p>With normal use and proper care, bottles can last several years. Avoid abrasive cleaners for painted
+          finishes.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Do you offer bulk/wholesale pricing?</h3>
+        <p>Yes. Use our Enquiry form to request quotes for bulk orders, branding, or events.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Are bottles dishwasher safe?</h3>
+        <p>Some models are dishwasher-safe (check product details). For powder-coated finishes we recommend hand washing
+          to maintain colour.</p>
+      </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- TESTIMONIALS -->
     <section class="section testimonials container">
       <h2>Customer Voices</h2>
       <div class="grid-3">
-        <blockquote class="card">“Keeps my water cold all day — excellent quality.” <cite>— Precios M.</cite>
-        </blockquote>
-        <blockquote class="card">“Great service and durable bottles.” <cite>— Mbofho M.</cite></blockquote>
-        <blockquote class="card">“Kids love the colours, and no leaks.” <cite>— Ndivhu.</cite></blockquote>
+        <blockquote class="card">“Keeps my water cold all day — excellent quality.” <cite>— Sarah M.</cite></blockquote>
+        <blockquote class="card">“Kids love the colours and no leaks.” <cite>— Thabo N.</cite></blockquote>
+        <blockquote class="card">“Great design and customer service.” <cite>— Lerato P.</cite></blockquote>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section cta container">
-      <h2>Ready to go reusable?</h2>
-      <p class="muted">Switch to EcoFresh and join the movement reducing single-use plastics.</p>
-      <a class="btn btn-primary" href="Pages/contact_us.html">Contact Us</a>
-    </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <div class="footer-links">
-        <a href="index.html">Home</a> ·
-        <a href="./Pages/product.html">Products</a> ·
-        <a href="./Pages/contact_us.html">Contact</a> ·
-        <a href="./Pages/sitemap.html">Sitemap</a>
+        <a href="./index.html">Home</a> ·
+        <a href="./pages/product.html">Products</a> ·
+        <a href="./pages/about_us.html">About us</a> ·
+        <a href="./pages/contact_us.html">Contact us</a> ·
       </div>
 
-      <div class="social-icons" aria-hidden="false">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="X" title="X"><i class="fab fa-x-twitter"></i></a>
       </div>
 
-      <p class="copyright">© 2025 EcoFresh Bottles. All rights reserved.</p>
+      <p class="copyright">© 2025 EcoFresh Bottles</p>
     </div>
   </footer>
 
-  <!-- Font Awesome icons -->
-  <script src="https://kit.fontawesome.com/a2d9d6a66f.js" crossorigin="anonymous"></script>
   <script src="./JS/style.js" defer></script>
 </body>
 
