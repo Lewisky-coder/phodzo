@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
             { id: 'custom', name: 'Custom Branded', price: 250, img: '../Assets/300ml.jpeg', tags: 'custom branded bulk' },
             { id: 'kids', name: 'all kind', price: 449, img: '../Assets/sport.jpeg', tags: 'kids colorful leakproof' },
             { id: 'kids', name: '650 ml', price: 450, img: '../Assets/1000.jpg', tags: 'kids colorful leakproof' },
-
             { id: 'stainless', name: 'stainless', price: 450, img: '../Assets/stainless.jpg', tags: 'stainless colorful leakproof' },
             { id: 'Custom', name: 'Anime', price: 329, img: '../Assets/animated.jpg', tags: 'Anime wide-mouth durable' },
             { id: 'everyday', name: 'Vacations', price: 339, img: '../Assets/everyday.jpg', tags: 'everyday lightweight' },
@@ -77,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="${p.img}" alt="EcoFresh ${p.name}" loading="lazy">
           <h3>${p.name}</h3>
           <p class="muted">R${p.price > 0 ? p.price : 'Price on request'}</p>
-          <div style="margin-top:.6rem"><a class="btn btn-secondary" href="./enquery.html">Enquire / Buy</a></div>
+          <div style="margin-top:.6rem"><a class="btn btn-secondary" href="./enquery.html">enquire / Buy</a></div>
         `;
                 container.appendChild(article);
             });
