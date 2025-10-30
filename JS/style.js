@@ -115,3 +115,73 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     })();
 });
+// JS/style.js — Unified Navigation + Hamburger Toggle
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".site-nav");
+
+    if (!hamburger || !nav) {
+        console.warn("[style.js] Missing hamburger or navigation elements.");
+        return;
+    }
+
+    hamburger.addEventListener("click", () => {
+        const expanded = hamburger.getAttribute("aria-expanded") === "true";
+        hamburger.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("active");
+    });
+
+    // Optional: Close menu when clicking a link (for mobile UX)
+    nav.querySelectorAll("a").forEach((link) =>
+        link.addEventListener("click", () => {
+            nav.classList.remove("active");
+            hamburger.setAttribute("aria-expanded", "false");
+        })
+    );
+
+    console.log("[style.js] Hamburger navigation initialized.");
+});
+// main.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    loginTab.addEventListener("click", () => {
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+        loginForm.classList.remove("hidden");
+        registerForm.classList.add("hidden");
+    });
+
+    registerTab.addEventListener("click", () => {
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+        registerForm.classList.remove("hidden");
+        loginForm.classList.add("hidden");
+    });
+});
+// Auth Tab Toggle
+document.addEventListener("DOMContentLoaded", () => {
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    loginTab.addEventListener("click", () => {
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+        loginForm.classList.remove("hidden");
+        registerForm.classList.add("hidden");
+    });
+
+    registerTab.addEventListener("click", () => {
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+        registerForm.classList.remove("hidden");
+        loginForm.classList.add("hidden");
+    });
+});

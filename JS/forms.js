@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const enquiryForm = findByIds(["enquiry-form", "enquery-form", "enquire-form", "enquiryform"]);
     const enquiryResponse = findByIds(["enquiry-response", "enquery-response", "enquire-response"]);
 
-    const contactForm = findByIds(["contact-form", "contactform"]);
-    const contactResponse = findByIds(["contact-response"]);
+    const contactForm = findByIds(["contact-form", "contactform", "contactform"]);
+    const contactResponse = findByIds(["contact-response", "contact-response", "contact-response"]);
     const dateDiv = findByIds(["current-datetime", "datetime", "date-display"]);
 
     log("DOM ready. Found elements:",
