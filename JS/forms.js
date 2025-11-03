@@ -85,3 +85,31 @@ document.addEventListener("DOMContentLoaded", () => {
         log("No contact form found on this page.");
     }
 });
+document.getElementById('enquiryForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const fields = ['fullname', 'email', 'phone', 'topic', 'message'];
+    let valid = true;
+
+    fields.forEach(id => {
+        const input = document.getElementById(id);
+        input.style.borderColor = '#ccc';
+        if (!input.value.trim()) {
+            input.style.borderColor = 'red';
+            valid = false;
+        }
+    });
+
+    const response = document.getElementById('responseMsg');
+    if (!valid) {
+        response.textContent = '⚠️ Please fill in all required fields.';
+        response.className = 'response error';
+        return;
+    }
+
+    response.textContent = '✅ Your enquiry has been sent successfully!';
+    response.className = 'response success';
+    this.reset();
+});
+
+

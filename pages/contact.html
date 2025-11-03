@@ -2,27 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us — EcoFresh Bottles</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="description"
+        content="EcoFresh Bottles — South Africa's trusted eco-friendly water bottle brand. Sustainable, reusable, and stylish bottles for every lifestyle.">
+    <meta name="keywords"
+        content="EcoFresh Bottles, reusable bottles, eco-friendly bottles, sustainable bottles, water bottles South Africa, echo fresh bottle">
+    <meta name="author" content="EcoFresh Bottles Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.ecofreshbottles.co.za/">
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
+    <!-- HEADER -->
     <header class="site-header">
         <div class="container header-grid">
             <a class="logo" href="../index.html">
-                <img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo">
+                <img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" />
             </a>
 
-            <nav class="site-nav">
+            <nav class="site-nav" aria-label="Main navigation">
                 <a href="../index.html">Home</a>
                 <a href="./about.html">About Us</a>
                 <a href="./product.html">Products</a>
                 <a href="./gallery.html">Gallery</a>
                 <a href="./enquery.html">Enquire</a>
-                <a href="./contact.html" class="active">Contact</a>
+                <a href="./contact.html" class="active">Contact Us</a>
             </nav>
 
             <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -31,102 +40,102 @@
         </div>
     </header>
 
-    <main class="container section">
+    <!-- MAIN -->
+    <main class="container section contact-layout">
         <h1>Contact Us</h1>
-        <p>Have questions about our bottles or your order? Reach us through any of the following channels.</p>
+        <p>We’d love to hear from you! Get in touch using the form or find us at our location below.</p>
 
-        <div class="contact-grid">
-            <div>
-                <h3>Customer Support</h3>
-                <p><i class="fa fa-envelope"></i> support@ecofresh.co.za</p>
-                <p><i class="fa fa-phone"></i> +27 71 123 4567</p>
-                <p><i class="fa fa-map-marker-alt"></i> 45 Green Street, Johannesburg, South Africa</p>
+        <div class="contact-wrapper">
+            <!-- LEFT: FORM -->
+            <div class="contact-form-container">
+                <h2>Send Us a Message</h2>
+                <form id="contactForm" class="contact-form">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" required />
+
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" placeholder="+27..." required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required />
+
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+
+                <p id="contactResponse" class="success-msg" style="display:none;">
+                    ✅ Message sent successfully! We'll get back to you soon.
+                </p>
+                <p id="contactError" class="error-msg" style="display:none; color:red;">
+                    ⚠️ Please fill in all required fields.
+                </p>
             </div>
 
-            <div>
-                <h3>Business Hours</h3>
-                <p>Monday – Friday: 8:00 AM – 5:00 PM</p>
-                <p>Saturday: 9:00 AM – 1:00 PM</p>
-                <p>Closed on Sundays and Public Holidays</p>
-                <section class="section container">
-                    <h1>Contact Us</h1>
-                    <div class="grid-2">
-                        <div>
-                            <p><strong>Email:</strong> <a href="mailto:info@ecofresh.co.za">info@ecofresh.co.za</a></p>
-                            <p><strong>Phone:</strong> +27 66 379 2391</p>
-                            <p><strong>Address:</strong> 21 Aqua Way, Johannesburg, South Africa</p>
+            <!-- RIGHT: INFO -->
+            <div class="contact-info">
+                <div class="card time-card">
+                    <h3>Current Date & Time</h3>
+                    <p id="currentDateTime"></p>
+                </div>
 
-                            <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
-                                <div class="input-row">
-                                    <label for="name">Name</label>
-                                    <input id="name" name="name" type="text" required>
-                                </div>
+                <div class="card contact-details">
+                    <h3>Our Contact Details</h3>
+                    <p><i class="fa fa-envelope"></i> support@ecofreshbottles.co.za</p>
+                    <p><i class="fa fa-phone"></i> +27 65 123 4567</p>
+                    <p><i class="fa fa-map-marker-alt"></i> 42 Green Street, Johannesburg, South Africa</p>
+                </div>
 
-                                <div class="input-row">
-                                    <label for="surname">Surname</label>
-                                    <input id="surname" name="surname" type="text" required>
-                                </div>
-
-                                <div class="input-row">
-                                    <label for="phone">Phone</label>
-                                    <input id="phone" name="phone" type="tel" placeholder="+27..." required>
-                                </div>
-
-                                <div class="input-row">
-                                    <label for="email">Email</label>
-                                    <input id="email" name="email" type="email" required>
-                                </div>
-
-                                <div class="input-row">
-                                    <label for="message">Message</label>
-                                    <textarea id="message" name="message" rows="5" required></textarea>
-                                </div>
-
-                                <div>
-                                    <button class="btn btn-primary" type="submit">Send Message</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div>
-                            <!-- Real Google Maps embed (Johannesburg area) -->
-                            <div class="map-wrap">
-                                <iframe title="EcoFresh location map"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.2460292575613!2d28.04730531502372!3d-26.20410298337809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9509a3b5d3c1ab%3A0xb3f6b4f0b27a5e7e!2sJohannesburg%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1750000000000"
-                                    width="100%" height="360" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div>
-                <h3>Current Date & Time</h3>
-                <p id="datetime"></p>
+                <div class="card map-card">
+                    <h3>Our Location</h3>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.053226630446!2d28.04730511503231!3d-26.20410298345616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c6cfb16abcf%3A0x4f0f9df40215c9a1!2sJohannesburg!5e0!3m2!1sen!2sza!4v1675851234567"
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-inner">
             <div class="social-icons">
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://wa.me/27663792391" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="X"><i class="fab fa-x-twitter"></i></a>
             </div>
             <p>© 2025 EcoFresh Bottles</p>
         </div>
     </footer>
 
-    <script src="../JS/forms.js" defer></script>
+    <script src="../JS/style.js" defer></script>
     <script>
-        // Display current date and time
+        // Form validation + response
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const fullname = document.getElementById("fullname").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!fullname || !phone || !email || !message) {
+                document.getElementById("contactError").style.display = "block";
+                document.getElementById("contactResponse").style.display = "none";
+                return;
+            }
+
+            document.getElementById("contactError").style.display = "none";
+            document.getElementById("contactResponse").style.display = "block";
+            this.reset();
+        });
+
+        // Display live date and time
+        const dateElement = document.getElementById("currentDateTime");
         function updateDateTime() {
             const now = new Date();
-            document.getElementById('datetime').textContent =
-                now.toLocaleString('en-ZA', { dateStyle: 'full', timeStyle: 'medium' });
+            dateElement.textContent = now.toLocaleString();
         }
         updateDateTime();
         setInterval(updateDateTime, 1000);

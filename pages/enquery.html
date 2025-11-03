@@ -2,30 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enquiry — EcoFresh Bottles</title>
-    <meta name="description"
-        content="Enquire about bulk orders, custom branding or sponsorships with EcoFresh Bottles." />
-    <meta name="keywords" content="EcoFresh enquiry, bulk order, custom bottles, sponsorship" />
+
     <link rel="stylesheet" href="../css/style.css">
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+    <!-- HEADER -->
     <header class="site-header">
         <div class="container header-grid">
-            <a class="logo" href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo"></a>
-
+            <a class="logo" href="../index.html">
+                <img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" />
+            </a>
 
             <nav class="site-nav" aria-label="Main navigation">
-                <a href="../index.html">home</a>
-                <a href="./about.html">about us</a>
-                <a href="./product.html">products</a>
-                <a href="./gallery.html">gallery</a>
-                <a href="./enquery.html" class="active">enquire</a>
-                <a href="./contact.html">contact us</a>
+                <a href="../index.html">Home</a>
+                <a href="./about.html">About Us</a>
+                <a href="./product.html">Products</a>
+                <a href="./gallery.html">Gallery</a>
+                <a href="./enquiry.html" class="active">Enquiry</a>
+                <a href="./contact.html">Contact</a>
             </nav>
 
             <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -34,70 +33,62 @@
         </div>
     </header>
 
-    <main>
-        <section class="section container">
-            <h1>Enquiry — Bulk, Branding & Partnerships</h1>
-            <p>Fill the form to request a quote for bulk orders, custom branding, sponsorships or volunteer
-                partnerships.</p>
+    <!-- MAIN -->
+    <main class="container">
+        <section class="enquiry-section">
+            <h1>Enquiry Form</h1>
+            <p>Got a question, suggestion, or bulk order request? Fill in the form below and we’ll respond shortly.</p>
 
-            <form id="enquiry-form" class="contact-form" action="#" method="post">
-                <div class="input-row">
-                    <label for="e-name">Full Name</label>
-                    <input id="e-name" name="name" type="text" required>
-                </div>
+            <div class="enquiry-card">
+                <form id="enquiryForm" class="enquiry-form">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Your full name">
+                    </div>
 
-                <div class="input-row">
-                    <label for="e-email">Email</label>
-                    <input id="e-email" name="email" type="email" required>
-                </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com">
+                    </div>
 
-                <div class="input-row">
-                    <label for="e-company">Company / Organisation (optional)</label>
-                    <input id="e-company" name="company" type="text">
-                </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+27...">
+                    </div>
 
-                <div class="input-row">
-                    <label for="e-product">Product</label>
-                    <select id="e-product" name="product" required>
-                        <option value="sport" data-label="Sport 750 ml">Sport 750 ml</option>
-                        <option value="kids" data-label="Kids 350 ml">Kids 350 ml</option>
-                        <option value="travel" data-label="Travel 1L">Travel 1 L</option>
-                        <option value="office" data-label="Office">office</option>
-                        <option value="All pair" data-label="Pairs">Pairs</option>
-                        <option value="Gym" data-label="Gym">Gym</option>
-                        <option value="custom" data-label="Custom / Branded">Custom / Branded</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Order / Product / Feedback">
+                    </div>
 
-                <div class="input-row">
-                    <label for="e-qty">Quantity</label>
-                    <input id="e-qty" name="quantity" type="number" min="1" value="1" required>
-                </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5"
+                            placeholder="Write your message here..."></textarea>
+                    </div>
 
-                <div class="input-row">
-                    <label for="e-message">Details (branding requirements / deadlines)</label>
-                    <textarea id="e-message" name="message" rows="4"></textarea>
-                </div>
+                    <button type="submit" class="btn-submit">Send Enquiry</button>
+                </form>
 
-                <div>
-                    <button class="btn btn-primary" type="submit">Get Estimate</button>
-                </div>
-            </form>
+                <p id="responseMsg" class="response"></p>
+            </div>
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-inner">
             <div class="social-icons">
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://wa.me/27663792391" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="X"><i class="fab fa-x-twitter"></i></a>
             </div>
             <p>© 2025 EcoFresh Bottles</p>
         </div>
     </footer>
 
+    <script src="../JS/style.js" defer></script>
     <script src="../JS/forms.js" defer></script>
 </body>
 

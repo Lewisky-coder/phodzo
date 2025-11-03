@@ -24,3 +24,4 @@ document.addEventListener("DOMContentLoaded", () => {
         noEl.textContent = visible === 0 ? "No products found — try another term." : "";
     });
 });
+
