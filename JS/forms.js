@@ -111,5 +111,210 @@ document.getElementById('enquiryForm').addEventListener('submit', function (e) {
     response.className = 'response success';
     this.reset();
 });
+// JS/formResponse.js — shared validation + full-screen popup with date/time
+document.addEventListener("DOMContentLoaded", () => {
+    const forms = document.querySelectorAll("form.enquiry-form, form.contact-form");
+    if (!forms.length) return;
+
+    forms.forEach(form => {
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            // Remove old error messages
+            form.querySelectorAll(".error-msg").forEach(el => el.remove());
+
+            let valid = true;
+
+            form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
+                if (!input.value.trim()) {
+                    valid = false;
+                    const error = document.createElement("div");
+                    error.className = "error-msg";
+                    error.textContent = `⚠️ Please fill in the ${input.name || "required"} field.`;
+                    input.insertAdjacentElement("afterend", error);
+                }
+            });
+
+            if (!valid) return;
+
+            // If form is valid → show response popup
+            showResponsePopup();
+            form.reset();
+        });
+    });
+
+    function showResponsePopup() {
+        const now = new Date();
+        const formattedDate = now.toLocaleString("en-ZA", {
+            dateStyle: "full",
+            timeStyle: "short"
+        });
+
+        const overlay = document.createElement("div");
+        overlay.className = "response-overlay";
+        overlay.innerHTML = `
+      <div class="response-box">
+        <h2>✅ Thank You!</h2>
+        <p>Your message has been received successfully.<br>
+        We’ll get back to you within 24 hours.</p>
+        <p class="timestamp">📅 Received on: <strong>${formattedDate}</strong></p>
+        <button id="closePopup">Close</button>
+      </div>
+    `;
+
+        document.body.appendChild(overlay);
+        document.body.style.overflow = "hidden";
+
+        document.getElementById("closePopup").addEventListener("click", () => {
+            overlay.remove();
+            document.body.style.overflow = "auto";
+        });
+    }
+});
+// JS/forms.js — unified form validation + full-screen response popup (with timestamp)
+// Place this at ../JS/forms.js and include as: <script src="../JS/forms.js" defer></script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("[forms.js] loaded");
+
+    // Select both enquiry and contact forms (by class)
+    const forms = document.querySelectorAll("form.enquiry-form, form.contact-form");
+    if (!forms || forms.length === 0) {
+        console.log("[forms.js] no forms found with class 'enquiry-form' or 'contact-form'");
+    }
+
+    forms.forEach(form => {
+        // make sure required attributes exist on inputs (just safety)
+        form.querySelectorAll("input, textarea, select").forEach(field => {
+            if (!field.hasAttribute("name")) {
+                // don't break; just add a name for error messages if needed
+                field.setAttribute("name", field.id || "field");
+            }
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log("[forms.js] submit triggered for", form);
+
+            // remove previous error messages
+            form.querySelectorAll(".error-msg").forEach(n => n.remove());
+
+            const requiredFields = Array.from(form.querySelectorAll("[required]"));
+            let valid = true;
+
+            requiredFields.forEach(input => {
+                // trim value for text-like inputs
+                const value = (input.value || "").toString().trim();
+                if (!value) {
+                    valid = false;
+                    showFieldError(input, `Please fill in the ${input.name || "required"} field.`);
+                } else {
+                    // remove any inline error if present
+                    const next = input.nextElementSibling;
+                    if (next && next.classList && next.classList.contains("error-msg")) next.remove();
+                }
+            });
+
+            // Basic email format check if there's an email field
+            const emailField = form.querySelector('input[type="email"]');
+            if (emailField && emailField.value.trim()) {
+                const emailVal = emailField.value.trim();
+                const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRe.test(emailVal)) {
+                    valid = false;
+                    showFieldError(emailField, "Please enter a valid email address.");
+                }
+            }
+
+            if (!valid) {
+                // focus first invalid field
+                const firstInvalid = form.querySelector(".error-msg");
+                if (firstInvalid) {
+                    const el = firstInvalid.previousElementSibling;
+                    if (el && typeof el.focus === "function") el.focus();
+                }
+                return;
+            }
+
+            // Valid -> show popup
+            showResponsePopup(form);
+            form.reset();
+        });
+    });
+
+    // helper: show small inline error under an input
+    function showFieldError(input, message) {
+        // avoid duplicate error nodes
+        const next = input.nextElementSibling;
+        if (next && next.classList && next.classList.contains("error-msg")) {
+            next.textContent = message;
+            return;
+        }
+        const err = document.createElement("div");
+        err.className = "error-msg";
+        err.textContent = message;
+        input.insertAdjacentElement("afterend", err);
+    }
+
+    // popup builder
+    function showResponsePopup(form) {
+        // remove any existing overlay first
+        document.querySelectorAll(".response-overlay").forEach(n => n.remove());
+
+        const now = new Date();
+        // South Africa locale; you can change locale code if needed
+        const formattedDate = now.toLocaleString("en-ZA", {
+            dateStyle: "full",
+            timeStyle: "short"
+        });
+
+        const overlay = document.createElement("div");
+        overlay.className = "response-overlay";
+        overlay.innerHTML = `
+      <div class="response-box" role="dialog" aria-modal="true" aria-label="Form submission response">
+        <button class="response-close" aria-label="Close response">&times;</button>
+        <div class="response-content">
+          <h2>✅ Thank you!</h2>
+          <p>Your message has been received. We'll reply within 24 hours.</p>
+          <p class="timestamp">Received on: <strong>${formattedDate}</strong></p>
+        </div>
+        <div class="response-actions">
+          <button class="response-ok">Close</button>
+        </div>
+      </div>
+    `;
+
+        // append overlay
+        document.body.appendChild(overlay);
+        // prevent background scroll
+        document.body.style.overflow = "hidden";
+
+        // focus management
+        const btnClose = overlay.querySelector(".response-close");
+        const btnOk = overlay.querySelector(".response-ok");
+        btnOk.focus();
+
+        function closeOverlay() {
+            overlay.remove();
+            document.body.style.overflow = "";
+        }
+
+        btnClose.addEventListener("click", closeOverlay);
+        btnOk.addEventListener("click", closeOverlay);
+
+        overlay.addEventListener("click", (ev) => {
+            if (ev.target === overlay) closeOverlay();
+        });
+
+        // keyboard escape
+        document.addEventListener("keydown", function onKey(e) {
+            if (e.key === "Escape") {
+                closeOverlay();
+                document.removeEventListener("keydown", onKey);
+            }
+        });
+    }
+
+});
 
 
