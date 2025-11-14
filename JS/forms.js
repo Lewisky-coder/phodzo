@@ -316,5 +316,95 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+    // ENQUIRY FORM
+    const enquiryForm = document.querySelector(".enquiry-form");
+    const contactForm = document.querySelector(".contact-form");
+
+    if (enquiryForm) setupForm(enquiryForm);
+    if (contactForm) {
+        setupForm(contactForm);
+        const timeBox = document.getElementById("current-time");
+        if (timeBox) {
+            const updateTime = () => {
+                const now = new Date();
+                timeBox.textContent = now.toLocaleString();
+            };
+            updateTime();
+            setInterval(updateTime, 1000);
+        }
+    }
+
+    function setupForm(form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const inputs = Array.from(form.querySelectorAll("input, textarea, select"));
+            const allFilled = inputs.every(i => i.value.trim() !== "");
+
+            if (!allFilled) return showResponse(form, "⚠️ Please fill in all required fields.", "error");
+
+            const emailInput = form.querySelector('input[type="email"]');
+            if (emailInput && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value))
+                return showResponse(form, "⚠️ Please enter a valid email address.", "error");
+
+            showResponse(form, "✅ Thank you! Your message was sent successfully.", "success");
+            form.reset();
+        });
+    }
+
+    function showResponse(form, message, type) {
+        let box = form.nextElementSibling;
+        if (!box || !box.classList.contains("response-box")) {
+            box = document.createElement("div");
+            box.className = "response-box";
+            form.insertAdjacentElement("afterend", box);
+        }
+        box.textContent = message;
+        box.className = `response-box ${type}`;
+        setTimeout(() => {
+            box.textContent = "";
+            box.className = "response-box";
+        }, 4000);
+    }
+});
+// JS for EcoFresh enquiry + contact forms + popup feedback
+
+document.addEventListener("DOMContentLoaded", () => {
+    const forms = document.querySelectorAll("form");
+    const popup = document.getElementById("popupMessage");
+    const closePopup = document.getElementById("closePopup");
+
+    forms.forEach(form => {
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            // Simple validation
+            const valid = [...form.elements].every(el => {
+                if (el.required && !el.value.trim()) {
+                    el.style.borderColor = "red";
+                    return false;
+                }
+                el.style.borderColor = "#ccc";
+                return true;
+            });
+
+            if (!valid) return;
+
+            // Simulate form submission
+            popup.classList.remove("hidden");
+            setTimeout(() => {
+                popup.classList.add("fade-in");
+            }, 50);
+
+            // Clear the form
+            form.reset();
+        });
+    });
+
+    closePopup.addEventListener("click", () => {
+        popup.classList.remove("fade-in");
+        setTimeout(() => popup.classList.add("hidden"), 400);
+    });
+});
 
 

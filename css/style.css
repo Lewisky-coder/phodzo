@@ -1093,3 +1093,67 @@ body {
     color: #666;
     cursor: pointer;
 }
+
+/* === Popup Fullscreen Overlay === */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.popup-overlay.fade-in {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popup-overlay.hidden {
+    display: none;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    animation: slideUp 0.5s ease;
+}
+
+.popup-content h2 {
+    color: #00897b;
+    margin-bottom: 0.5rem;
+}
+
+.popup-content button {
+    background-color: #00897b;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.popup-content button:hover {
+    background-color: #00796b;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

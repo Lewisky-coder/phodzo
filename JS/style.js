@@ -472,3 +472,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".site-nav");
+
+    if (hamburger && nav) {
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("show");
+            hamburger.classList.toggle("active");
+        });
+    }
+
+    // Flip cards on About Us
+    const cards = document.querySelectorAll(".team-card");
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+        });
+    });
+});
+// JS for EcoFresh enquiry + contact forms + popup feedback
+
+document.addEventListener("DOMContentLoaded", () => {
+    const forms = document.querySelectorAll("form");
+    const popup = document.getElementById("popupMessage");
+    const closePopup = document.getElementById("closePopup");
+
+    forms.forEach(form => {
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            // Simple validation
+            const valid = [...form.elements].every(el => {
+                if (el.required && !el.value.trim()) {
+                    el.style.borderColor = "red";
+                    return false;
+                }
+                el.style.borderColor = "#ccc";
+                return true;
+            });
+
+            if (!valid) return;
+
+            // Simulate form submission
+            popup.classList.remove("hidden");
+            setTimeout(() => {
+                popup.classList.add("fade-in");
+            }, 50);
+
+            // Clear the form
+            form.reset();
+        });
+    });
+
+    closePopup.addEventListener("click", () => {
+        popup.classList.remove("fade-in");
+        setTimeout(() => popup.classList.add("hidden"), 400);
+    });
+});
