@@ -8,6 +8,33 @@
     <meta name="description" content="Submit enquiries for bulk orders, pricing and partnerships." />
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #ef4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .btn-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,42 +67,72 @@
                     <p>Choose a product and enter the quantity. We'll calculate a simple estimate. For formal quotes,
                         our sales team will follow up.</p>
                     <div class="map-box">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="180"
-                            style="border:0;" loading="lazy"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.7133788111614!2d30.402606075090965!3d-22.997564979191257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ec5c5324f2ce77f%3A0xba23011c467f0fb0!2sTshisahulu%20Anglican%20Church%2C%20St%20Mary&#39;s!5e0!3m2!1sen!2sza!4v1763496053590!5m2!1sen!2sza"
+                            width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
 
                 <div class="enquiry-card">
-                    <form id="enquiryForm" class="enquiry-form">
+                    <div class="success-message" id="successMessage">
+                        Thank you! Your enquiry has been sent successfully. We'll contact you soon with a formal quote.
+                    </div>
+
+                    <div class="error-message" id="errorMessage">
+                        Please fill in all required fields correctly.
+                    </div>
+
+                    <form id="enquiryForm" class="enquiry-form"
+                        action="https://formsubmit.co/phodzomainganye17@gmail.com" method="POST" novalidate>
+                        <!-- FormSubmit Hidden Fields -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_subject" value="New Enquiry - EcoFresh Bottles">
+                        <input type="hidden" name="estimated_total" id="hiddenTotal">
+
                         <div class="form-group">
                             <label for="enqName">Full Name</label>
                             <input id="enqName" name="name" required>
                         </div>
 
                         <div class="form-group">
+                            <label for="enqEmail">Email Address</label>
+                            <input id="enqEmail" name="email" type="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enqPhone">Phone Number</label>
+                            <input id="enqPhone" name="phone" type="tel" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="productSelect">Product</label>
                             <select id="productSelect" name="product" required>
-                                <option value="none">-- Select a product --</option>
-                                <option value="kids350">Kids 350 ml (R149)</option>
-                                <option value="sport750">Stainless Pro 750 ml (R299)</option>
-                                <option value="travel1l">Travel 1 L (R349)</option>
-                                <option value="100ml">Pocket 100 ml (R89)</option>
-                                <option value="luxury">BottleZ Luxury (R599)</option>
+                                <option value="">-- Select a product --</option>
+                                <option value="Kids 350 ml (R149)" data-price="149">Kids 350 ml (R149)</option>
+                                <option value="Stainless Pro 750 ml (R299)" data-price="299">Stainless Pro 750 ml (R299)
+                                </option>
+                                <option value="Travel 1 L (R349)" data-price="349">Travel 1 L (R349)</option>
+                                <option value="Pocket 100 ml (R89)" data-price="89">Pocket 100 ml (R89)</option>
+                                <option value="BottleZ Luxury (R599)" data-price="599">BottleZ Luxury (R599)</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="qty">Quantity</label>
-                            <input id="qty" name="qty" type="number" min="1" value="1" required>
+                            <input id="qty" name="quantity" type="number" min="1" value="1" required>
                         </div>
 
                         <div class="form-group">
                             <label>Estimated Total</label>
-                            <div id="enquiryTotal" style="font-weight:700;">R0.00</div>
+                            <div id="enquiryTotal" style="font-weight:700; font-size: 1.2rem; color: #059669;">R0.00
+                            </div>
                         </div>
 
                         <div style="text-align:right;">
-                            <button type="submit" class="btn-submit">Send Enquiry</button>
+                            <button type="submit" class="btn-submit" id="submitBtn">Send Enquiry</button>
                         </div>
                     </form>
                     <div id="enqResponse" class="response" aria-live="polite"></div>
@@ -91,6 +148,94 @@
     </footer>
 
     <script src="../JS/style.js" defer></script>
+    <script>
+        // Calculate total price
+        function calculateTotal() {
+            const productSelect = document.getElementById('productSelect');
+            const qtyInput = document.getElementById('qty');
+            const totalDisplay = document.getElementById('enquiryTotal');
+            const hiddenTotal = document.getElementById('hiddenTotal');
+
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const price = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+            const qty = parseInt(qtyInput.value) || 0;
+
+            const total = price * qty;
+            totalDisplay.textContent = 'R' + total.toFixed(2);
+            hiddenTotal.value = 'R' + total.toFixed(2);
+        }
+
+        // Add event listeners for calculation
+        document.getElementById('productSelect').addEventListener('change', calculateTotal);
+        document.getElementById('qty').addEventListener('input', calculateTotal);
+
+        // Form submission handler
+        document.getElementById('enquiryForm').addEventListener('submit', function (e) {
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = this;
+
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            // Check if form is valid
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Highlight invalid fields
+                const inputs = form.querySelectorAll('input[required], select[required]');
+                inputs.forEach(input => {
+                    if (!input.validity.valid) {
+                        input.style.borderColor = '#ef4444';
+                    }
+                });
+
+                return false;
+            }
+
+            // Update total before submission
+            calculateTotal();
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+        });
+
+        // Remove red border on input when user interacts
+        document.querySelectorAll('#enquiryForm input, #enquiryForm select').forEach(input => {
+            input.addEventListener('input', function () {
+                if (this.validity.valid) {
+                    this.style.borderColor = '';
+                }
+            });
+            input.addEventListener('change', function () {
+                if (this.validity.valid) {
+                    this.style.borderColor = '';
+                }
+            });
+        });
+
+        // Check URL for FormSubmit success parameter
+        window.addEventListener('load', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                // Clear form
+                document.getElementById('enquiryForm').reset();
+                calculateTotal();
+
+                // Remove success parameter from URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+    </script>
 </body>
 
 </html>
