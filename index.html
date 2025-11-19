@@ -5,49 +5,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EcoFresh Bottles — Home</title>
-  <meta name="google-site-verification" content="6genoCRjwHbO5oQjpdScMuOxE_hinu0ei0dCHEKzd9g" />
   <meta name="description"
-    content="EcoFresh Bottles — South Africa's trusted eco-friendly water bottle brand. Sustainable, reusable, and stylish bottles for every lifestyle.">
+    content="EcoFresh Bottles — durable, BPA-free reusable bottles designed for everyday life. Reduce single-use plastic with style." />
   <meta name="keywords"
-    content="EcoFresh Bottles, reusable bottles, eco-friendly bottles, sustainable bottles, water bottles South Africa, echo fresh bottle">
-  <meta name="author" content="EcoFresh Bottles Team">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.ecofreshbottles.co.za/">
+    content="EcoFresh, reusable bottles, BPA-free bottles, stainless steel, travel bottle, kids bottle" />
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" href="./Assets/favicon.png" type="image/png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="./Assets/Logo.jpeg" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
   <header class="site-header">
     <div class="container header-grid">
       <a class="logo" href="./index.html" aria-label="EcoFresh Home">
-        <img src="./Assets/Logo.jpeg" alt="EcoFresh Bottles logo">
+        <img src="./Assets/Logo.jpeg" alt="EcoFresh Bottles logo" />
       </a>
 
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="./index.html" class="active">home</a>
-        <a href="./pages/about.html">about us</a>
-        <a href="./pages/product.html">products</a>
-        <a href="./pages/gallery.html">gallery</a>
-        <a href="./pages/enquery.html">enquire</a>
-        <a href="./pages/contact.html">contact us</a>
-
+        <a href="./index.html" class="active">Home</a>
+        <a href="./pages/about.html">About Us</a>
+        <a href="./pages/product.html">Products</a>
+        <a href="./pages/gallery.html">Gallery</a>
+        <a href="./pages/enquery.html">Enquiry</a>
+        <a href="./pages/contact.html">Contact</a>
       </nav>
 
-      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" aria-label="Toggle menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-inner">
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-inner">
         <div class="hero-left">
           <h1>EcoFresh Bottles</h1>
-          <p class="lead">Eco-friendly, durable bottles — designed to reduce single-use plastics while keeping style and
-            performance.</p>
+          <p class="lead">Premium reusable bottles built for life — durable, BPA-free and designed to keep your drinks
+            fresh.</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="./pages/product.html">Shop Now</a>
             <a class="btn btn-outline" href="./pages/about.html">Learn More</a>
@@ -59,13 +54,15 @@
       </div>
     </section>
 
-    <section class="section mission container">
+    <!-- FEATURES -->
+    <section class="section container mission">
       <h2>Our Mission</h2>
-      <p>We design and supply high-quality reusable bottles — stainless steel, Tritan™ and glass options — to make
-        everyday hydration sustainable and beautiful.</p>
+      <p>We design and supply high-quality reusable bottles — stainless steel, Tritan™ and glass options — making
+        hydration sustainable and stylish.</p>
     </section>
 
-    <section class="section features container">
+    <!-- FEATURE CARDS -->
+    <section class="section container features">
       <div class="grid-3">
         <article class="feature card">
           <div class="feature-icon">🌱</div>
@@ -87,60 +84,47 @@
       </div>
     </section>
 
+    <!-- FEATURED PRODUCTS -->
     <section class="section products-preview container">
       <h2>Featured Bottles</h2>
-      <div class="product-grid grid-3" id="featured-grid">
-        <article class="product card">
-          <img src="./Assets/stainless.jpg" alt="Stainless Pro 750ml double-wall insulated bottle" loading="lazy">
-          <h3>Stainless Pro</h3>
-          <p class="muted">Double-wall insulated. Keeps drinks cold for 18h. <strong>R299</strong></p>
-        </article>
-
-        <article class="product card">
-          <img src="./Assets/Kids.jpeg" alt="Kids 350ml bottle pastel" loading="lazy">
-          <h3>Kids 350 ml</h3>
-          <p class="muted">Lightweight and leak-proof spout. <strong>R149</strong></p>
-        </article>
-
-        <article class="product card">
-          <img src="./Assets/1000.jpg" alt="Travel 1L wide mouth bottle" loading="lazy">
-          <h3>Travel 1 L</h3>
-          <p class="muted">Wide mouth and carry loop. <strong>R349</strong></p>
-        </article>
+      <div class="product-grid" id="products-container">
+        <!-- JS will populate; static fallback below -->
       </div>
-      <p class="center"><a class="btn btn-secondary" href="./pages/product.html">View All Products</a></p>
+      <p class="center"><a class="btn btn-outline" href="./pages/product.html">View All Products</a></p>
     </section>
 
-    <section class="section faq container" id="home-faq">
+    <!-- FAQ (index only) -->
+    <section class="section faq container">
       <h2>Frequently Asked Questions</h2>
 
       <div class="faq-item">
-        <h3>Are EcoFresh bottles BPA-free?</h3>
-        <p>Yes — all plastic parts are BPA-free and food-safe. Stainless steel models are food-grade 18/8.</p>
+        <div class="faq-q"><strong>Are EcoFresh bottles BPA-free?</strong></div>
+        <div class="faq-a">
+          <p>Yes — all plastic parts are BPA-free and food-safe. Stainless steel models are food-grade 18/8.</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3>How long do the bottles last?</h3>
-        <p>With normal use and proper care, bottles can last several years. Avoid abrasive cleaners for painted
-          finishes.</p>
+        <div class="faq-q"><strong>How long do the bottles last?</strong></div>
+        <div class="faq-a">
+          <p>With normal use and proper care, bottles can last several years. Avoid abrasive cleaners for painted
+            finishes.</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3>Do you offer bulk/wholesale pricing?</h3>
-        <p>Yes. Use our Enquiry form to request quotes for bulk orders, branding, or events.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Are bottles dishwasher safe?</h3>
-        <p>Some models are dishwasher-safe (check product details). For powder-coated finishes we recommend hand washing
-          to maintain colour.</p>
+        <div class="faq-q"><strong>Do you offer bulk pricing?</strong></div>
+        <div class="faq-a">
+          <p>Yes. Use our Enquiry form to request quotes for bulk orders, branding, or events.</p>
+        </div>
       </div>
     </section>
 
+    <!-- Testimonials -->
     <section class="section testimonials container">
       <h2>Customer Voices</h2>
       <div class="grid-3">
-        <blockquote class="card">“Keeps my water cold all day — excellent quality.” <cite>— Sarah M.</cite></blockquote>
+        <blockquote class="card">“Keeps my water cold all day.” <cite>— Sarah M.</cite></blockquote>
         <blockquote class="card">“Kids love the colours and no leaks.” <cite>— Thabo N.</cite></blockquote>
         <blockquote class="card">“Great design and customer service.” <cite>— Lerato P.</cite></blockquote>
       </div>
@@ -151,22 +135,21 @@
   <footer>
     <div class="container footer-inner">
       <div class="footer-links">
-        <a href="./index.html">Home</a>
-        <a href="./pages/product.html">Products</a>
-        <a href="./pages/about.html">About us</a>
-        <a href="./pages/contact.html">Contact us</a>
+        <a href="./index.html">Home</a> |
+        <a href="./pages/product.html">Products</a> |
+        <a href="./pages/about.html">About</a> |
+        <a href="./pages/contact.html">Contact</a>
       </div>
 
-      <div class="container footer-inner">
-        <div class="social-icons">
-          <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/27663792391" target="_blank"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
-        </div>
-
-        <p class="copyright">© 2025 EcoFresh Bottles</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
       </div>
+
+      <p class="copyright">© 2025 EcoFresh Bottles</p>
+    </div>
   </footer>
 
   <script src="./JS/style.js" defer></script>

@@ -2,78 +2,114 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us — EcoFresh Bottles</title>
-    <meta name="description"
-        content="EcoFresh Bottles — South Africa's trusted eco-friendly water bottle brand. Sustainable, reusable, and stylish bottles for every lifestyle.">
-    <meta name="keywords"
-        content="EcoFresh Bottles, reusable bottles, eco-friendly bottles, sustainable bottles, water bottles South Africa, echo fresh bottle">
-    <meta name="author" content="EcoFresh Bottles Team">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.ecofreshbottles.co.za/">
-
-    <link rel="stylesheet" href="../css/style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — EcoFresh Bottles</title>
+    <meta name="description" content="Contact EcoFresh Bottles for orders, support and enquiries." />
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #ef4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .btn-primary:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Hide default error messages */
+        .error-msg {
+            display: none;
+        }
+
+        /* Style for invalid inputs */
+        .contact-form input:invalid:not(:placeholder-shown),
+        .contact-form textarea:invalid:not(:placeholder-shown) {
+            border-color: #ef4444;
+        }
+
+        .contact-form input:valid,
+        .contact-form textarea:valid {
+            border-color: #10b981;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- HEADER -->
     <header class="site-header">
         <div class="container header-grid">
-            <a class="logo" href="../index.html">
-                <img src="../Assets/Logo.jpeg" alt="EcoFresh Bottles logo" />
-            </a>
+            <a class="logo" href="../index.html"><img src="../Assets/Logo.jpeg" alt="EcoFresh logo"></a>
 
-            <nav class="site-nav" aria-label="Main navigation">
+            <nav class="site-nav">
                 <a href="../index.html">Home</a>
-                <a href="./about.html">About Us</a>
+                <a href="./about.html">About</a>
                 <a href="./product.html">Products</a>
                 <a href="./gallery.html">Gallery</a>
-                <a href="./enquery.html">Enquire</a>
-                <a href="./contact.html" class="active">Contact Us</a>
+                <a href="./enquery.html">Enquiry</a>
+                <a href="./contact.html" class="active">Contact</a>
             </nav>
 
-            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="hamburger" aria-label="Menu"
+                aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
     </header>
 
-    <!-- MAIN -->
     <main class="container section contact-layout">
         <h1>Contact Us</h1>
-        <p>We’d love to hear from you! Get in touch using the form or find us at our location below.</p>
+        <p>We'd love to hear from you! Use the form or reach us directly.</p>
 
         <div class="contact-wrapper">
-            <!-- LEFT: FORM -->
             <div class="contact-form-container">
-                <h2>Send Us a Message</h2>
-                <form id="contactForm" class="contact-form">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" required />
+                <h2>Send a Message</h2>
 
-                    <label for="phone">Phone</label>
-                    <input id="phone" name="phone" type="tel" placeholder="+27..." required>
+                <div class="success-message" id="successMessage">
+                    Thank you! Your message has been sent successfully. We'll contact you soon.
+                </div>
 
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required />
+                <div class="error-message" id="errorMessage">
+                    There was an error sending your message. Please try again or contact us directly.
+                </div>
 
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+                <form id="contactForm" class="contact-form" action="https://formsubmit.co/phodzomainganye17@gmail.com"
+                    method="POST" novalidate>
+                    <!-- FormSubmit Hidden Fields -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="New Contact Form Submission - EcoFresh Bottles">
 
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <label for="fullname">Full Name *</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
                 </form>
-
-                <p id="contactResponse" class="success-msg" style="display:none;">
-                    ✅ Message sent successfully! We'll get back to you soon.
-                </p>
-                <p id="contactError" class="error-msg" style="display:none; color:red;">
-                    ⚠️ Please fill in all required fields.
-                </p>
             </div>
-
-            <!-- RIGHT: INFO -->
             <div class="contact-info">
                 <div class="card time-card">
                     <h3>Current Date & Time</h3>
@@ -82,64 +118,123 @@
 
                 <div class="card contact-details">
                     <h3>Our Contact Details</h3>
-                    <p><i class="fa fa-envelope"></i> support@ecofreshbottles.co.za</p>
-                    <p><i class="fa fa-phone"></i> +27 66 379 2391</p>
-                    <p><i class="fa fa-map-marker-alt"></i> 42 Green Street, Johannesburg, South Africa</p>
-                </div>
 
-                <div class="card map-card">
-                    <h3>Our Location</h3>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.053226630446!2d28.04730511503231!3d-26.20410298345616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c6cfb16abcf%3A0x4f0f9df40215c9a1!2sJohannesburg!5e0!3m2!1sen!2sza!4v1675851234567"
-                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <!-- Email Link -->
+                    <p>
+                        <a href="mailto:phodzomainganye17@gmail.com">
+                            <i class="fa fa-envelope"></i> phodzomainganye17@gmail.com
+                        </a>
+                    </p>
+
+                    <!-- Phone Link -->
+                    <p>
+                        <a href="tel:+27651234567">
+                            <i class="fa fa-phone"></i> +27 65 123 4567
+                        </a>
+                    </p>
+
+                    <p>
+                        <i class="fa fa-map-marker-alt"></i> 42 Green Street, Johannesburg
+                    </p>
                 </div>
             </div>
+
+
+            <div class="card map-card">
+                <h3>Our Location</h3>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.7133788111614!2d30.402606075090965!3d-22.997564979191257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ec5c5324f2ce77f%3A0xba23011c467f0fb0!2sTshisahulu%20Anglican%20Church%2C%20St%20Mary&#39;s!5e0!3m2!1sen!2sza!4v1763496053590!5m2!1sen!2sza"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
         </div>
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container footer-inner">
-            <div class="social-icons">
-                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="X"><i class="fab fa-x-twitter"></i></a>
-            </div>
             <p>© 2025 EcoFresh Bottles</p>
         </div>
     </footer>
 
-    <script src="../JS/style.js" defer></script>
     <script>
-        // Form validation + response
-        document.getElementById("contactForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const fullname = document.getElementById("fullname").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const message = document.getElementById("message").value.trim();
+        /* CONTACT live clock */
+        (function liveClock() {
+            const clock = document.getElementById('currentDateTime');
+            if (!clock) return;
+            function tick() {
+                const now = new Date();
+                clock.textContent = now.toLocaleString();
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
 
-            if (!fullname || !phone || !email || !message) {
-                document.getElementById("contactError").style.display = "block";
-                document.getElementById("contactResponse").style.display = "none";
-                return;
+        // Form submission handler with validation
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = this;
+
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            // Check if form is valid
+            if (!form.checkValidity()) {
+                e.preventDefault();
+
+                // Show error message
+                errorMessage.textContent = 'Please fill in all required fields correctly.';
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Highlight invalid fields
+                const inputs = form.querySelectorAll('input[required], textarea[required]');
+                inputs.forEach(input => {
+                    if (!input.validity.valid) {
+                        input.style.borderColor = '#ef4444';
+                    }
+                });
+
+                return false;
             }
 
-            document.getElementById("contactError").style.display = "none";
-            document.getElementById("contactResponse").style.display = "block";
-            this.reset();
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // FormSubmit will handle the actual submission
         });
 
-        // Display live date and time
-        const dateElement = document.getElementById("currentDateTime");
-        function updateDateTime() {
-            const now = new Date();
-            dateElement.textContent = now.toLocaleString();
-        }
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
+        // Remove red border on input when user starts typing
+        document.querySelectorAll('#contactForm input, #contactForm textarea').forEach(input => {
+            input.addEventListener('input', function () {
+                if (this.validity.valid) {
+                    this.style.borderColor = '';
+                }
+            });
+        });
+
+        // Check URL for FormSubmit success parameter
+        window.addEventListener('load', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                // Clear form
+                document.getElementById('contactForm').reset();
+
+                // Remove success parameter from URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
     </script>
+
+
 </body>
 
 </html>

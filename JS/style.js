@@ -1,532 +1,517 @@
-/* JS/style.js – Clean Unified Site Behaviour */
+/* JS/script.js - Combined site behaviour
+   - hamburger (works on all pages)
+   - FAQ accordion (index)
+   - tabs
+   - product & employee search
+   - gallery lightbox
+   - contact + enquiry validation & response
+   - enquiry price calculation
+*/
+
 document.addEventListener("DOMContentLoaded", () => {
-    const $ = (sel, root = document) => root.querySelector(sel);
-    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    /* ---------- helpers ---------- */
+    const $ = (sel, root = document) => (root || document).querySelector(sel);
+    const $$ = (sel, root = document) => Array.from((root || document).querySelectorAll(sel));
 
-    /* 🌿 Hamburger Menu */
-    (function hamburgerMenu() {
+    /* ---------- HAMBURGER (universal) ---------- */
+    (function hamburger() {
         const ham = $(".hamburger");
-        const nav = $(".site-nav");
+        const nav = document.querySelector(".site-nav");
         if (!ham || !nav) return;
-
         ham.addEventListener("click", () => {
-            const isActive = nav.classList.toggle("active");
             ham.classList.toggle("open");
-            ham.setAttribute("aria-expanded", isActive);
+            nav.classList.toggle("active"); // CSS shows/hides menu
+            // set aria-expanded
+            const expanded = ham.getAttribute("aria-expanded") === "true";
+            ham.setAttribute("aria-expanded", String(!expanded));
         });
-
-        // Close menu when link is clicked
-        $$("a", nav).forEach((link) =>
-            link.addEventListener("click", () => {
-                nav.classList.remove("active");
-                ham.classList.remove("open");
-                ham.setAttribute("aria-expanded", "false");
-            })
-        );
-    })();
-
-    /* 💬 FAQ Accordion */
-    (function faqAccordion() {
-        const faq = $(".faq");
-        if (!faq) return;
-        const items = $$(".faq-item", faq);
-        items.forEach((item) =>
-            item.addEventListener("click", () => {
-                items.forEach((i) => i !== item && i.classList.remove("active"));
-                item.classList.toggle("active");
-            })
-        );
-    })();
-
-    /* 🖼️ Gallery Lightbox */
-    (function lightbox() {
-        const imgs = $$("main .gallery-grid img, .gallery-grid img");
-        if (!imgs.length) return;
-        const lb = document.createElement("div");
-        lb.className = "ef-lightbox";
-        lb.style.cssText =
-            "position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.86);z-index:9999;visibility:hidden;opacity:0;transition:opacity .2s";
-        lb.innerHTML = `
-      <button class="ef-close" aria-label="Close" style="position:absolute;right:1rem;top:1rem;background:transparent;border:none;color:#fff;font-size:2rem;cursor:pointer">×</button>
-      <button class="ef-prev" aria-label="Prev" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#fff;font-size:2rem;cursor:pointer">‹</button>
-      <img class="ef-img" src="" alt="" style="max-width:92%;max-height:82%;border-radius:.5rem;box-shadow:0 12px 40px rgba(0,0,0,.6)">
-      <button class="ef-next" aria-label="Next" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#fff;font-size:2rem;cursor:pointer">›</button>
-    `;
-        document.body.appendChild(lb);
-
-        const srcs = imgs.map((i) => ({
-            src: i.getAttribute("src"),
-            alt: i.getAttribute("alt") || "",
+        // close on nav link click (mobile)
+        $$("a", nav).forEach(a => a.addEventListener("click", () => {
+            nav.classList.remove("active");
+            ham.classList.remove("open");
+            ham.setAttribute("aria-expanded", "false");
         }));
-        let current = 0;
-        function show(i) {
-            const img = $(".ef-img", lb);
-            img.src = srcs[i].src;
-            img.alt = srcs[i].alt;
-            lb.style.visibility = "visible";
-            lb.style.opacity = 1;
-            current = i;
-        }
-        function hide() {
-            lb.style.opacity = 0;
-            setTimeout(() => (lb.style.visibility = "hidden"), 220);
-        }
-
-        imgs.forEach((imgEl, i) =>
-            imgEl.addEventListener("click", (e) => {
-                e.preventDefault();
-                show(i);
-            })
-        );
-        $(".ef-close", lb).addEventListener("click", hide);
-        $(".ef-next", lb).addEventListener("click", () =>
-            show((current + 1) % srcs.length)
-        );
-        $(".ef-prev", lb).addEventListener("click", () =>
-            show((current - 1 + srcs.length) % srcs.length)
-        );
-        lb.addEventListener("click", (e) => {
-            if (e.target === lb) hide();
-        });
-        document.addEventListener("keydown", (e) => {
-            if (lb.style.visibility === "visible") {
-                if (e.key === "Escape") hide();
-                if (e.key === "ArrowRight") $(".ef-next", lb).click();
-                if (e.key === "ArrowLeft") $(".ef-prev", lb).click();
-            }
-        });
     })();
 
-    /* 📩 Contact Form */
-    (function contactForm() {
-        const form = $("#contact-form");
-        if (!form) return;
-        function isEmail(v) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-        }
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            form.querySelectorAll(".ef-error").forEach((n) => n.remove());
-            const fd = Object.fromEntries(new FormData(form).entries());
-            let ok = true;
-
-            if (!fd.name?.trim()) {
-                showError("#name", "Enter your name");
-                ok = false;
-            }
-            if (!isEmail(fd.email)) {
-                showError("#email", "Enter a valid email");
-                ok = false;
-            }
-            if (!fd.message?.trim()) {
-                showError("#message", "Please enter a message");
-                ok = false;
-            }
-
-            if (!ok) return;
-            alert("✅ Thank you! Your message has been sent.");
-            form.reset();
-        });
-
-        function showError(selector, msg) {
-            const el = $(selector);
-            const err = document.createElement("div");
-            err.className = "ef-error";
-            err.style.color = "crimson";
-            err.textContent = msg;
-            el.insertAdjacentElement("afterend", err);
-        }
-    })();
-
-    /* 🧍 Employee Search */
-    (function employeeSearch() {
-        const searchInput = $("#employeeSearch");
-        const employees = $$("#employeeList .team-card");
-        if (!searchInput) return;
-
-        searchInput.addEventListener("keyup", () => {
-            const value = searchInput.value.toLowerCase();
-            employees.forEach((card) => {
-                const name = card.querySelector("h3").textContent.toLowerCase();
-                const role = card.querySelector("p").textContent.toLowerCase();
-                card.style.display =
-                    name.includes(value) || role.includes(value) ? "" : "none";
-            });
-        });
-    })();
-
-    /* 🔁 Flip Card */
-    (function flipCard() {
-        const cards = $$(".team-card");
-        cards.forEach((card) =>
-            card.addEventListener("click", () => card.classList.toggle("flipped"))
-        );
-    })();
-
-    /* 🌱 Reveal Animation */
+    /* ---------- REVEAL ANIM (simple) ---------- */
     (function reveal() {
         const els = $$("main section, .card, .product-card, .feature");
         els.forEach((el, i) => {
             el.style.opacity = 0;
-            el.style.transform = "translateY(10px)";
+            el.style.transform = "translateY(8px)";
             setTimeout(() => {
-                el.style.transition = "all .6s ease";
+                el.style.transition = "all .45s ease";
                 el.style.opacity = 1;
                 el.style.transform = "translateY(0)";
-            }, 120 + i * 30);
+            }, 90 + i * 25);
         });
     })();
-});
-// Card flip on click
-document.querySelectorAll(".employee-card").forEach(card => {
-    card.addEventListener("click", () => {
-        card.classList.toggle("flipped");
-    });
-});
 
-// Search bar filter
-document.getElementById("employeeSearch").addEventListener("keyup", function () {
-    const query = this.value.toLowerCase();
-    document.querySelectorAll(".employee-card").forEach(card => {
-        const name = card.dataset.name.toLowerCase();
-        const role = card.dataset.role.toLowerCase();
-        card.style.display = (name.includes(query) || role.includes(query)) ? "block" : "none";
-    });
-});
-// ✅ HAMBURGER MENU
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.site-nav');
-
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', !expanded);
-});
-
-// ✅ FORM VALIDATION
-document.getElementById('enquiryForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const fields = ['fullname', 'email', 'phone', 'subject', 'message'];
-    let valid = true;
-
-    fields.forEach(id => {
-        const input = document.getElementById(id);
-        input.style.borderColor = '#ccc';
-        if (!input.value.trim()) {
-            input.style.borderColor = 'red';
-            valid = false;
-        }
-    });
-
-    const response = document.getElementById('responseMsg');
-    if (!valid) {
-        response.textContent = '⚠️ Please fill in all required fields.';
-        response.className = 'response error';
-        return;
-    }
-
-    response.textContent = '✅ Enquiry sent successfully! We’ll get back to you soon.';
-    response.className = 'response success';
-    this.reset();
-});
-/* Simple front-end auth (localStorage demo) */
-function setupAuth() {
-    const regForm = document.getElementById('register-form');
-    const loginForm = document.getElementById('login-form');
-    if (regForm) {
-        regForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const name = regForm.querySelector('[name="reg-name"]').value.trim();
-            const email = regForm.querySelector('[name="reg-email"]').value.trim();
-            const pwd = regForm.querySelector('[name="reg-password"]').value;
-            if (!name || !email || !pwd) { showToast('Please complete all fields'); return; }
-            const users = JSON.parse(localStorage.getItem('murn_users') || '[]');
-            if (users.find(u => u.email === email)) { showToast('Email already registered'); return; }
-            users.push({ name, email, password: pwd });
-            localStorage.setItem('murn_users', JSON.stringify(users));
-            showToast('Registration successful — you can now log in');
-            regForm.reset();
-        });
-    }
-    if (loginForm) {
-        loginForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const email = loginForm.querySelector('[name="login-email"]').value.trim();
-            const pwd = loginForm.querySelector('[name="login-password"]').value;
-            const users = JSON.parse(localStorage.getItem('murn_users') || '[]');
-            const found = users.find(u => u.email === email && u.password === pwd);
-            if (found) {
-                localStorage.setItem('murn_current', JSON.stringify({ name: found.name, email: found.email }));
-                showToast(`Welcome back, ${found.name}`);
-                loginForm.reset();
-            } else {
-                showToast('Invalid credentials');
-            }
-        });
-    }
-}
-// JS/formResponse.js — shared validation + full-screen popup with date/time
-document.addEventListener("DOMContentLoaded", () => {
-    const forms = document.querySelectorAll("form.enquiry-form, form.contact-form");
-    if (!forms.length) return;
-
-    forms.forEach(form => {
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-
-            // Remove old error messages
-            form.querySelectorAll(".error-msg").forEach(el => el.remove());
-
-            let valid = true;
-
-            form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
-                if (!input.value.trim()) {
-                    valid = false;
-                    const error = document.createElement("div");
-                    error.className = "error-msg";
-                    error.textContent = `⚠️ Please fill in the ${input.name || "required"} field.`;
-                    input.insertAdjacentElement("afterend", error);
-                }
+    /* ---------- FAQ ACCORDION (index only) ---------- */
+    (function faq() {
+        const faqs = $$(".faq-item .faq-q");
+        if (!faqs.length) return;
+        faqs.forEach(q => {
+            q.addEventListener("click", () => {
+                const item = q.closest(".faq-item");
+                // close others
+                $$(".faq-item").forEach(i => {
+                    if (i !== item) {
+                        i.classList.remove("active");
+                        const p = i.querySelector(".faq-a");
+                        if (p) p.style.maxHeight = null;
+                    }
+                });
+                item.classList.toggle("active");
+                const panel = item.querySelector(".faq-a");
+                if (panel.style.maxHeight) panel.style.maxHeight = null;
+                else panel.style.maxHeight = panel.scrollHeight + "px";
             });
-
-            if (!valid) return;
-
-            // If form is valid → show response popup
-            showResponsePopup();
-            form.reset();
         });
-    });
+    })();
 
-    function showResponsePopup() {
-        const now = new Date();
-        const formattedDate = now.toLocaleString("en-ZA", {
-            dateStyle: "full",
-            timeStyle: "short"
+    /* ---------- TABS (generic) ---------- */
+    (function tabs() {
+        const buttons = $$("[data-tab]");
+        if (!buttons.length) return;
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const target = btn.dataset.tab;
+                buttons.forEach(b => b.classList.remove("active"));
+                $$(".tab-panel").forEach(p => p.classList.remove("active"));
+                btn.classList.add("active");
+                const panel = document.getElementById(target);
+                if (panel) panel.classList.add("active");
+            });
         });
+    })();
 
-        const overlay = document.createElement("div");
-        overlay.className = "response-overlay";
-        overlay.innerHTML = `
-      <div class="response-box">
-        <h2>✅ Thank You!</h2>
-        <p>Your message has been received successfully.<br>
-        We’ll get back to you within 24 hours.</p>
-        <p class="timestamp">📅 Received on: <strong>${formattedDate}</strong></p>
-        <button id="closePopup">Close</button>
+    /* ---------- GALLERY LIGHTBOX (images & videos) ---------- */
+    (function lightbox() {
+        const media = $$(".gallery-grid img, .gallery-grid video");
+        if (!media.length) return;
+
+        const lb = document.createElement("div");
+        lb.className = "ef-lightbox";
+        lb.innerHTML = `
+      <div class="ef-inner">
+        <button class="ef-close" aria-label="Close">✕</button>
+        <div class="ef-media-wrap"></div>
+        <div class="ef-caption"></div>
       </div>
     `;
-
-        document.body.appendChild(overlay);
-        document.body.style.overflow = "hidden";
-
-        document.getElementById("closePopup").addEventListener("click", () => {
-            overlay.remove();
-            document.body.style.overflow = "auto";
-        });
-    }
-});
-// JS/forms.js — unified form validation + full-screen response popup (with timestamp)
-// Place this at ../JS/forms.js and include as: <script src="../JS/forms.js" defer></script>
-
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("[forms.js] loaded");
-
-    // Select both enquiry and contact forms (by class)
-    const forms = document.querySelectorAll("form.enquiry-form, form.contact-form");
-    if (!forms || forms.length === 0) {
-        console.log("[forms.js] no forms found with class 'enquiry-form' or 'contact-form'");
-    }
-
-    forms.forEach(form => {
-        // make sure required attributes exist on inputs (just safety)
-        form.querySelectorAll("input, textarea, select").forEach(field => {
-            if (!field.hasAttribute("name")) {
-                // don't break; just add a name for error messages if needed
-                field.setAttribute("name", field.id || "field");
+        document.body.appendChild(lb);
+        const wrap = $(".ef-media-wrap", lb);
+        const caption = $(".ef-caption", lb);
+        function showMedia(node) {
+            wrap.innerHTML = "";
+            caption.textContent = node.alt || node.dataset.caption || "";
+            if (node.tagName.toLowerCase() === "img") {
+                const img = document.createElement("img");
+                img.src = node.src;
+                img.alt = node.alt || "";
+                img.loading = "eager";
+                wrap.appendChild(img);
+            } else if (node.tagName.toLowerCase() === "video") {
+                const vid = document.createElement("video");
+                vid.controls = true;
+                vid.src = node.querySelector("source") ? node.querySelector("source").src : node.currentSrc;
+                wrap.appendChild(vid);
+                vid.play().catch(() => { /* autoplay might be blocked */ });
             }
+            lb.classList.add("visible");
+            document.body.style.overflow = "hidden";
+        }
+        media.forEach(m => m.addEventListener("click", () => showMedia(m)));
+        $(".ef-close", lb).addEventListener("click", () => {
+            lb.classList.remove("visible");
+            document.body.style.overflow = "";
+            wrap.innerHTML = "";
         });
+        lb.addEventListener("click", e => { if (e.target === lb) { $(".ef-close", lb).click(); } });
+    })();
 
-        form.addEventListener("submit", (e) => {
+    /* ---------- PRODUCTS (product page) - search + dynamic populate ---------- */
+    (function products() {
+        const container = $("#products-container");
+        const search = $("#product-search") || $("#searchProducts");
+        if (!container) return;
+
+        // Product data — use the images you have in /Assets
+        const products = [
+            { id: 'kids350', title: 'Kids 350 ml', price: 149, img: '../Assets/Kids.jpeg', desc: 'Lightweight, bite-safe spout.' },
+            { id: 'sport750', title: 'Stainless Pro 750 ml', price: 299, img: '../Assets/sport.jpeg', desc: 'Double-wall insulated.' },
+            { id: 'travel1l', title: 'Travel 1 L', price: 349, img: '../Assets/travel1.jpeg', desc: 'Wide mouth, carry loop.' },
+            { id: '100ml', title: 'Pocket 100 ml', price: 89, img: '../Assets/special.jpg', desc: 'Compact and light.' },
+            { id: 'luxury', title: 'BottleZ Luxury', price: 599, img: '../Assets/all pair.jpeg', desc: 'Premium finish.' }
+        ];
+
+        function render(list) {
+            container.innerHTML = '';
+            list.forEach(p => {
+                const article = document.createElement('article');
+                article.className = 'product-card card';
+                article.innerHTML = `
+          <img src="${p.img}" alt="${p.title}">
+          <h3>${p.title}</h3>
+          <p class="muted">${p.desc}</p>
+          <p><strong>R${p.price}</strong></p>
+          <a class="btn btn-outline" href="./contact.html">Enquire</a>
+        `;
+                container.appendChild(article);
+            });
+        }
+
+        render(products);
+
+        if (search) {
+            search.addEventListener('input', (e) => {
+                const q = e.target.value.trim().toLowerCase();
+                const filtered = products.filter(p => (p.title + ' ' + p.desc).toLowerCase().includes(q));
+                render(filtered);
+            });
+        }
+    })();
+
+    /* ---------- ABOUT (employee search + flip cards) ---------- */
+    (function employees() {
+        const list = $("#employeeList");
+        const search = $("#employeeSearch");
+        if (!list) return;
+
+        // Ten example employees (use your images in Assets, update filenames if needed)
+        const employees = [
+            { name: "Phodzo Kevin", role: "Founder & CEO", img: "../Assets/Phodzo.jpg", bio: "Founder - product design & operations. Awarded local entrepreneur of the year." },
+            { name: "Molatelo M.", role: "Managing Director", img: "../Assets/Mbofho.jpeg", bio: "Head of quality and logistics." },
+            { name: "Rofhiwa R.", role: "Head of Production", img: "../Assets/Employee 1.jpeg", bio: "Oversees manufacturing & QA." },
+            { name: "Masekgwari S.", role: "Sales Lead", img: "../Assets/Employee 2.jpeg", bio: "Leads retail & wholesale partnerships." },
+            { name: "Lerato P.", role: "Customer Service", img: "../Assets/Employee 5.jpeg", bio: "Customer relations & after-sales support." },
+            { name: "Thabo N.", role: "Marketing", img: "../Assets/employee 6.jpeg", bio: "Digital marketing and campaigns." },
+            { name: "Sarah M.", role: "Design", img: "../Assets/billie.jpeg", bio: "Product & packaging designer." },
+            { name: "John D.", role: "Engineer", img: "../Assets/john.jpeg", bio: "R&D and material sourcing." },
+            { name: "Anele K.", role: "Finance", img: "../Assets/manage.jpg", bio: "Manages budgets & forecasting." },
+            { name: "Zinhle Z.", role: "Logistics", img: "../Assets/Messi", bio: "Coordinates deliveries & warehouse." }
+        ];
+
+        function buildCards(listEl) {
+            listEl.innerHTML = '';
+            employees.forEach(emp => {
+                const card = document.createElement('div');
+                card.className = 'team-card employee-card';
+                card.innerHTML = `
+          <div class="card-inner">
+            <div class="card-front card">
+              <img src="${emp.img}" alt="${emp.name}">
+              <h3>${emp.name}</h3>
+              <p>${emp.role}</p>
+            </div>
+            <div class="card-back card">
+              <h3>${emp.name}</h3>
+              <p><strong>Role:</strong> ${emp.role}</p>
+              <p>${emp.bio}</p>
+            </div>
+          </div>
+        `;
+                // flip on click
+                card.addEventListener('click', () => card.classList.toggle('flipped'));
+                listEl.appendChild(card);
+            });
+        }
+
+        buildCards(list);
+
+        if (search) {
+            search.addEventListener('input', (e) => {
+                const q = e.target.value.trim().toLowerCase();
+                $$("#employeeList .team-card").forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = text.includes(q) ? '' : 'none';
+                });
+            });
+        }
+    })();
+
+    /* ---------- ENQUIRY page: calculation & validation ---------- */
+    (function enquiry() {
+        const form = document.getElementById("enquiryForm");
+        if (!form) return;
+        const productSelect = $("#productSelect");
+        const qty = $("#qty");
+        const totalBox = $("#enquiryTotal");
+        const priceMap = {
+            'kids350': 149,
+            'sport750': 299,
+            'travel1l': 349,
+            '100ml': 89,
+            'luxury': 599
+        };
+
+        function calc() {
+            const p = productSelect.value;
+            const q = parseInt(qty.value) || 0;
+            const price = priceMap[p] || 0;
+            const total = price * q;
+            totalBox.textContent = total > 0 ? `R${total.toFixed(2)}` : 'R0.00';
+        }
+
+        productSelect.addEventListener('change', calc);
+        qty.addEventListener('input', calc);
+
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log("[forms.js] submit triggered for", form);
-
-            // remove previous error messages
-            form.querySelectorAll(".error-msg").forEach(n => n.remove());
-
-            const requiredFields = Array.from(form.querySelectorAll("[required]"));
-            let valid = true;
-
-            requiredFields.forEach(input => {
-                // trim value for text-like inputs
-                const value = (input.value || "").toString().trim();
-                if (!value) {
-                    valid = false;
-                    showFieldError(input, `Please fill in the ${input.name || "required"} field.`);
+            // basic validation
+            const name = $("#enqName");
+            const product = productSelect;
+            const quantity = qty;
+            let ok = true;
+            [name, product, quantity].forEach(f => {
+                if (!f.value || f.value.trim() === "" || f.value === "none") {
+                    f.style.border = "2px solid red";
+                    ok = false;
                 } else {
-                    // remove any inline error if present
-                    const next = input.nextElementSibling;
-                    if (next && next.classList && next.classList.contains("error-msg")) next.remove();
+                    f.style.border = "2px solid #00c853";
                 }
             });
-
-            // Basic email format check if there's an email field
-            const emailField = form.querySelector('input[type="email"]');
-            if (emailField && emailField.value.trim()) {
-                const emailVal = emailField.value.trim();
-                const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRe.test(emailVal)) {
-                    valid = false;
-                    showFieldError(emailField, "Please enter a valid email address.");
-                }
-            }
-
-            if (!valid) {
-                // focus first invalid field
-                const firstInvalid = form.querySelector(".error-msg");
-                if (firstInvalid) {
-                    const el = firstInvalid.previousElementSibling;
-                    if (el && typeof el.focus === "function") el.focus();
-                }
+            if (!ok) {
+                showResponseOverlay('Please complete required fields', false);
                 return;
             }
 
-            // Valid -> show popup
-            showResponsePopup(form);
+            // success: show overlay (and keep data)
+            showResponseOverlay('Enquiry received — we will contact you within 24 hours.', true);
             form.reset();
+            calc();
         });
-    });
+    })();
 
-    // helper: show small inline error under an input
-    function showFieldError(input, message) {
-        // avoid duplicate error nodes
-        const next = input.nextElementSibling;
-        if (next && next.classList && next.classList.contains("error-msg")) {
-            next.textContent = message;
-            return;
-        }
-        const err = document.createElement("div");
-        err.className = "error-msg";
-        err.textContent = message;
-        input.insertAdjacentElement("afterend", err);
-    }
+    /* ---------- CONTACT FORM: validation + mailto + overlay ---------- */
+    (function contact() {
+        const form = document.getElementById("contactForm");
+        if (!form) return;
+        const overlayRoot = document.createElement('div');
+        overlayRoot.id = 'ef-response-overlay';
+        document.body.appendChild(overlayRoot);
 
-    // popup builder
-    function showResponsePopup(form) {
-        // remove any existing overlay first
-        document.querySelectorAll(".response-overlay").forEach(n => n.remove());
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullname = $("#fullname");
+            const email = $("#email");
+            const phone = $("#phone");
+            const message = $("#message");
 
-        const now = new Date();
-        // South Africa locale; you can change locale code if needed
-        const formattedDate = now.toLocaleString("en-ZA", {
-            dateStyle: "full",
-            timeStyle: "short"
+            let ok = true;
+            [fullname, email, phone, message].forEach(f => {
+                if (!f.value || f.value.trim() === "") {
+                    f.style.border = "2px solid red";
+                    ok = false;
+                } else {
+                    f.style.border = "2px solid #00c853";
+                }
+            });
+            if (!ok) {
+                showResponseOverlay('Please fill in all required fields', false);
+                return;
+            }
+
+            // build mailto to your provided email
+            const mailto = `mailto:phodzomainganye17@gmail.com` +
+                `?subject=${encodeURIComponent('EcoFresh Contact from ' + fullname.value)}` +
+                `&body=${encodeURIComponent('Name: ' + fullname.value + '\\nPhone: ' + phone.value + '\\nEmail: ' + email.value + '\\n\\nMessage:\\n' + message.value)}`;
+
+            // show overlay and redirect to mailto
+            showResponseOverlay('Thanks — message prepared. Your email client will open now.', true);
+            setTimeout(() => {
+                window.location.href = mailto;
+                form.reset();
+            }, 900);
         });
 
-        const overlay = document.createElement("div");
-        overlay.className = "response-overlay";
-        overlay.innerHTML = `
-      <div class="response-box" role="dialog" aria-modal="true" aria-label="Form submission response">
-        <button class="response-close" aria-label="Close response">&times;</button>
-        <div class="response-content">
-          <h2>✅ Thank you!</h2>
-          <p>Your message has been received. We'll reply within 24 hours.</p>
-          <p class="timestamp">Received on: <strong>${formattedDate}</strong></p>
+        // overlay helper (shared with enquiry)
+        function showResponseOverlay(msg, success = true) {
+            const overlay = document.createElement('div');
+            overlay.className = 'response-overlay';
+            overlay.innerHTML = `
+        <div class="response-box">
+          <button class="response-close" aria-label="close">✕</button>
+          <h2>${success ? 'Thank you!' : 'Oops...'}</h2>
+          <p>${msg}</p>
+          <div class="timestamp">${new Date().toLocaleString()}</div>
+          <div class="response-actions"><button class="response-ok">Close</button></div>
         </div>
-        <div class="response-actions">
-          <button class="response-ok">Close</button>
-        </div>
-      </div>
-    `;
-
-        // append overlay
-        document.body.appendChild(overlay);
-        // prevent background scroll
-        document.body.style.overflow = "hidden";
-
-        // focus management
-        const btnClose = overlay.querySelector(".response-close");
-        const btnOk = overlay.querySelector(".response-ok");
-        btnOk.focus();
-
-        function closeOverlay() {
-            overlay.remove();
-            document.body.style.overflow = "";
+      `;
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+            overlay.querySelector('.response-close').addEventListener('click', () => closeOverlay());
+            overlay.querySelector('.response-ok').addEventListener('click', () => closeOverlay());
+            function closeOverlay() {
+                overlay.remove();
+                document.body.style.overflow = '';
+            }
         }
 
-        btnClose.addEventListener("click", closeOverlay);
-        btnOk.addEventListener("click", closeOverlay);
+        // expose globally for enquiry usage
+        window.showResponseOverlay = showResponseOverlay;
+    })();
 
-        overlay.addEventListener("click", (ev) => {
-            if (ev.target === overlay) closeOverlay();
-        });
+}); // DOMContentLoaded
 
-        // keyboard escape
-        document.addEventListener("keydown", function onKey(e) {
-            if (e.key === "Escape") {
-                closeOverlay();
-                document.removeEventListener("keydown", onKey);
+
+/* ----------------------------------
+   UNIVERSAL FORM VALIDATION FUNCTION
+-----------------------------------*/
+function validateForm(formId, rules) {
+    const form = document.getElementById(formId);
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let valid = true;
+
+        Object.keys(rules).forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+            const errorMsg = document.querySelector(`#${fieldId}-error`);
+
+            if (input && errorMsg) {
+                if (input.value.trim() === "") {
+                    valid = false;
+                    errorMsg.style.display = "block";
+                    input.classList.add("input-error");
+                } else {
+                    errorMsg.style.display = "none";
+                    input.classList.remove("input-error");
+                }
             }
         });
-    }
 
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const hamburger = document.querySelector(".hamburger");
-    const nav = document.querySelector(".site-nav");
+        if (valid) {
+            if (formId === "contactForm") {
+                // OPEN EMAIL APP
+                const emailBody = encodeURIComponent(
+                    "Name: " + document.getElementById("fullname").value + "\n" +
+                    "Phone: " + document.getElementById("phone").value + "\n" +
+                    "Email: " + document.getElementById("email").value + "\n\n" +
+                    document.getElementById("message").value
+                );
 
-    if (hamburger && nav) {
-        hamburger.addEventListener("click", () => {
-            nav.classList.toggle("show");
-            hamburger.classList.toggle("active");
-        });
-    }
+                window.location.href =
+                    `mailto:phodzomainganye17@gmail.com?subject=EcoFresh Contact Form&body=${emailBody}`;
+            }
 
-    // Flip cards on About Us
-    const cards = document.querySelectorAll(".team-card");
-    cards.forEach((card) => {
-        card.addEventListener("click", () => {
-            card.classList.toggle("flipped");
-        });
-    });
-});
-// JS for EcoFresh enquiry + contact forms + popup feedback
-
-document.addEventListener("DOMContentLoaded", () => {
-    const forms = document.querySelectorAll("form");
-    const popup = document.getElementById("popupMessage");
-    const closePopup = document.getElementById("closePopup");
-
-    forms.forEach(form => {
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-
-            // Simple validation
-            const valid = [...form.elements].every(el => {
-                if (el.required && !el.value.trim()) {
-                    el.style.borderColor = "red";
-                    return false;
-                }
-                el.style.borderColor = "#ccc";
-                return true;
-            });
-
-            if (!valid) return;
-
-            // Simulate form submission
-            popup.classList.remove("hidden");
-            setTimeout(() => {
-                popup.classList.add("fade-in");
-            }, 50);
-
-            // Clear the form
             form.reset();
-        });
+        }
     });
+}
 
-    closePopup.addEventListener("click", () => {
-        popup.classList.remove("fade-in");
-        setTimeout(() => popup.classList.add("hidden"), 400);
-    });
+
+/* ----------------------------------
+   APPLY VALIDATION TO FORMS
+-----------------------------------*/
+validateForm("enquiryForm", {
+    enquiryName: true,
+    enquiryEmail: true,
+    enquiryTopic: true,
+    enquiryMessage: true
 });
+
+validateForm("contactForm", {
+    fullname: true,
+    phone: true,
+    email: true,
+    message: true
+});
+
+
+/* ----------------------------------
+   LIVE DATE TIME (if exists)
+-----------------------------------*/
+const dateElement = document.getElementById("currentDateTime");
+if (dateElement) {
+    function updateDateTime() {
+        const now = new Date();
+        dateElement.textContent = now.toLocaleString();
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+}
+/* ---------------------------
+   GLOBAL FORM VALIDATION FUNCTION
+----------------------------*/
+
+// adds red borders + error messages
+function validateField(input, message) {
+    let error = input.nextElementSibling;
+
+    if (!error || !error.classList.contains("error-msg")) {
+        error = document.createElement("span");
+        error.classList.add("error-msg");
+        input.after(error);
+    }
+
+    if (input.value.trim() === "") {
+        input.style.border = "2px solid red";
+        error.style.color = "red";
+        error.textContent = message;
+        return false;
+    } else {
+        input.style.border = "2px solid green";
+        error.textContent = "";
+        return true;
+    }
+}
+
+/* ---------------------------
+   CONTACT FORM VALIDATION
+----------------------------*/
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("cName");
+        const email = document.getElementById("cEmail");
+        const message = document.getElementById("cMessage");
+
+        let valid = true;
+        valid &= validateField(name, "Please enter your name");
+        valid &= validateField(email, "Please enter your email");
+        valid &= validateField(message, "Message cannot be empty");
+
+        if (valid) {
+            window.location.href =
+                "mailto:phodzomainganye17@gmail.com?subject=Website Contact Message&body=" +
+                encodeURIComponent(message.value);
+
+            alert("Message sent successfully!");
+            contactForm.reset();
+        }
+    });
+}
+
+/* ---------------------------
+   ENQUIRE FORM VALIDATION
+----------------------------*/
+const enquireForm = document.getElementById("enquireForm");
+
+if (enquireForm) {
+    enquireForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("eName");
+        const email = document.getElementById("eEmail");
+        const product = document.getElementById("eProduct");
+        const qty = document.getElementById("eQuantity");
+
+        let valid = true;
+        valid &= validateField(name, "Enter your full name");
+        valid &= validateField(email, "Enter a valid email");
+        valid &= validateField(product, "Choose a product");
+        valid &= validateField(qty, "Enter quantity");
+
+        if (valid) {
+            alert("Your enquiry has been submitted — thank you!");
+            enquireForm.reset();
+        }
+    });
+}
